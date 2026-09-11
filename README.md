@@ -4,98 +4,98 @@
   <img src="Puss%20in%20Hell%20SEO/Capsul%20%2B%20Biblio/logo.png" alt="Puss in Hell" width="360">
 </p>
 
-Монохромний червоний 3D-горор про маленьку кицьку, що заблукала в пеклі. Порожні коридори в стилі Backrooms, покинуті вулиці, глітч-ефекти на екрані, коли поруч щось є, і ліхтарик, який ніколи не рятує до кінця.
+A monochrome red 3D horror game about a little kitty lost in hell. Empty Backrooms-style corridors, abandoned streets, glitch effects that creep onto the screen when something is near, and a flashlight that never quite saves you.
 
-Гра від третьої особи з окремими зонами від першої особи. Створено на **Unity 6 (6000.3.8f1)**, **URP**, **Cinemachine**, **Timeline**.
+Third-person exploration with dedicated first-person zones. Built with **Unity 6 (6000.3.8f1)**, **URP**, **Cinemachine** and **Timeline**.
 
 <p align="center">
-  <img src="Puss%20in%20Hell%20SEO/Sreenshots/screanshot%20(5).jpg" alt="Коридор" width="49%">
-  <img src="Puss%20in%20Hell%20SEO/Sreenshots/screanshot%20(1).jpg" alt="Вулиця" width="49%">
+  <img src="Puss%20in%20Hell%20SEO/Sreenshots/screanshot%20(5).jpg" alt="Corridor" width="49%">
+  <img src="Puss%20in%20Hell%20SEO/Sreenshots/screanshot%20(1).jpg" alt="Street" width="49%">
 </p>
 
 ---
 
-## Геймплей
+## Gameplay
 
-- **Дослідження.** Гравець керує кицькою (WASD, Shift — біг, Space — стрибок, F — ліхтарик). Камера — Cinemachine від третьої особи з колізіями, у тригерних зонах перемикається на камеру від першої особи без стрибка кута огляду.
-- **Страх.** Біля ворожих NPC екран поступово «ламається» глітч-ефектом (Fronkon Games Glitches → Hacked) і звужується віньєтка. Коли інтенсивність перевищує поріг, персонаж переходить в анімацію страху та вмикаються візуальні ефекти.
-- **Взаємодія.** Об'єкти підсвічуються контуром при наближенні (HaloHighlighter). Клавіша **E** активує їх: запускає анімацію, показує локалізовану підказку або відмічає прогрес. Коли всі потрібні об'єкти зібрано — стартує катсцена на Timeline.
-- **Катсцени.** Тригерні зони та менеджер об'єктів запускають PlayableDirector з окремою віртуальною камерою, блокують управління й меню паузи. Пропуск — Esc.
-- **AFK-анімації.** Якщо гравець стоїть без діла 10 секунд, кицька грає одну з двох випадкових idle-анімацій.
-- **Кроки по поверхнях.** Звук кроків залежить від шару, на якому стоїть персонаж (бетон, дерево тощо).
-- **Таргани.** Автономні NPC, що блукають по поверхнях, відбиваються від стін і видають звуки шурхоту.
+- **Exploration.** You control the kitty (WASD, Shift to run, Space to jump, F for the flashlight). The camera is a third-person Cinemachine rig with collision handling. Trigger zones switch to a first-person camera without any snap in the view direction.
+- **Fear.** Near hostile NPCs the screen gradually "breaks" with a glitch effect (Fronkon Games Glitches → Hacked) and the vignette closes in. Once the intensity crosses a threshold the character enters a fear animation and extra visual effects kick in.
+- **Interaction.** Objects get an outline when you approach (HaloHighlighter). Pressing **E** activates them: plays an animation, shows a localized hint, or marks progress. When every required object has been collected, a Timeline cutscene starts.
+- **Cutscenes.** Trigger volumes and the object manager start a PlayableDirector with its own virtual camera, lock player input and block the pause menu. Esc skips.
+- **AFK animations.** Stand still for 10 seconds and the kitty plays one of two random idle animations.
+- **Surface footsteps.** Footstep sounds depend on the layer the character stands on (concrete, wood, etc.).
+- **Cockroaches.** Autonomous NPCs that wander over surfaces, bounce off walls and scuttle audibly.
 
-## Меню та налаштування
+## Menu and settings
 
-- Інтро-відео → головне меню (Sad Main Menu Pack) → екран завантаження з відео → рівень.
-- Меню паузи на Esc з паузою часу, звуками й поверненням у меню.
-- Глобальний менеджер налаштувань (`DontDestroyOnLoad`, PlayerPrefs): гучність Master / FX / Music через AudioMixer, рівень якості, VSync, роздільна здатність.
-- **Локалізація на 10 мов**: українська, англійська, російська, японська, німецька, французька, іспанська, турецька, італійська, польська. Тексти в UI (`LocalizedTMP`), випадаючі списки та ігрові підказки оновлюються миттєво при зміні мови.
+- Intro video → main menu (Sad Main Menu Pack) → loading screen with video → level.
+- Pause menu on Esc with time scale pause, sounds and a return to the main menu.
+- Global settings manager (`DontDestroyOnLoad`, PlayerPrefs): Master / FX / Music volume through an AudioMixer, quality level, VSync, screen resolution.
+- **Localization in 10 languages**: English, Ukrainian, Russian, Japanese, German, French, Spanish, Turkish, Italian, Polish. UI texts (`LocalizedTMP`), dropdowns and in-game hints update instantly when the language changes.
 
-## Структура проєкту
+## Project structure
 
 ```
 Assets/
-├── Scenes/            intro, menu, loading, lvl1 (у білді), lvl2, lvl3 (у розробці)
+├── Scenes/            intro, menu, loading, lvl1 (in build), lvl2, lvl3 (in progress)
 ├── Scripts/
 │   ├── Player/        PlayerController, FlashlightToggle
 │   ├── Cameras/       FirstPersonCamera, CameraSwitchTrigger, HorizontalCamera
 │   ├── Cinematics/    CutsceneTrigger, HaloHighlighterCutsceneManager, CinematicCamera
 │   ├── Objects/       HaloHighlighter, InteractiveHint, HintMessageManager, ObjectInteraction
 │   ├── Npc/           CockroachController, NPCglitch (GameRenderManager, NPCRenderTrigger, Vignette)
-│   ├── Menu/          PauseMenuManager, MainMenuManager, GlobalSettingsManager, локалізація
+│   ├── Menu/          PauseMenuManager, MainMenuManager, GlobalSettingsManager, localization
 │   └── Audio/         DelayedAudioPlay
-├── Prefabs/           Esc (меню паузи), Labirint, Video Player
-├── Settings/          URP-ассети LOW / NORMAL / BEST, Volume-профілі GAME / HACKED
-└── Materials/         моделі, аудіо, відео, шрифти та сторонні паки
-Puss in Hell SEO/      логотип, капсули для Steam, скріншоти, тизер
+├── Prefabs/           Esc (pause menu), Labirint, Video Player
+├── Settings/          URP assets LOW / NORMAL / BEST, Volume profiles GAME / HACKED
+└── Materials/         models, audio, video, fonts and third-party packs
+Puss in Hell SEO/      logo, Steam capsules, screenshots, teaser
 ```
 
-## Ключові системи
+## Core systems
 
-| Система | Скрипт | Що робить |
+| System | Script | What it does |
 |---|---|---|
-| Рух | `PlayerController` | Rigidbody-рух відносно камери, біг, стрибок, кроки по шарах, стан страху, AFK |
-| Глітч | `GameRenderManager` + `NPCRenderTrigger` | NPC щокадру звітують інтенсивність за відстанню, менеджер бере максимум і плавно застосовує до ефекту Hacked |
-| Віньєтка | `VignetteRadiusTrigger` | Керує Vignette у Global Volume за відстанню до гравця |
-| Камери | `CameraSwitchTrigger` | Перемикає пріоритети віртуальних камер, синхронізує yaw/pitch FPS-камери, ховає шар Player із culling mask |
-| Підсвітка | `HaloHighlighter` | Додає outline-матеріал до рендерерів у радіусі, подія `OnAnyActivated` для менеджерів |
-| Підказки | `HintMessageManager` | Синглтон із локалізованими повідомленнями за ключем, fade in/out |
-| Завантаження | `VideoSceneLoader` | Асинхронно вантажить сцену, активує її після закінчення відео |
+| Movement | `PlayerController` | Camera-relative Rigidbody movement, running, jumping, per-layer footsteps, fear state, AFK |
+| Glitch | `GameRenderManager` + `NPCRenderTrigger` | Every NPC reports an intensity based on distance each frame; the manager takes the maximum and smoothly applies it to the Hacked effect |
+| Vignette | `VignetteRadiusTrigger` | Drives the Vignette in the Global Volume by distance to the player |
+| Cameras | `CameraSwitchTrigger` | Swaps virtual camera priorities, syncs the FPS camera yaw/pitch, hides the Player layer from the culling mask |
+| Highlight | `HaloHighlighter` | Adds an outline material to renderers within a radius, fires `OnAnyActivated` for managers |
+| Hints | `HintMessageManager` | Singleton with key-based localized messages and fade in/out |
+| Loading | `VideoSceneLoader` | Loads the scene asynchronously and activates it once the video finishes |
 
-## Технології
+## Tech
 
 - Unity 6000.3.8f1, Universal Render Pipeline 17.3
-- Cinemachine 2.10, Timeline, Input (legacy `Input.GetKey`)
+- Cinemachine 2.10, Timeline, legacy Input (`Input.GetKey`)
 - TextMeshPro, Post Processing, Visual Effect Graph
-- Fronkon Games — Glitches (ефект Hacked)
+- Fronkon Games — Glitches (Hacked effect)
 - Gabriel Bissonnette — Sad Main Menu Pack
-- Backrooms Like Asset, Airduct BMT, AK Studio Art, Lowpoly Street Pack, Starfield Skybox та інші паки з Asset Store
+- Backrooms Like Asset, Airduct BMT, AK Studio Art, Lowpoly Street Pack, Starfield Skybox and other Asset Store packs
 
-## Запуск
+## Getting started
 
-1. Клонувати репозиторій.
-2. Відкрити папку в Unity Hub через Unity **6000.3.8f1**.
-3. Дочекатися імпорту (проєкт важкий, близько 2 ГБ ассетів).
-4. Відкрити `Assets/Scenes/intro.unity` і натиснути Play. Порядок сцен у білді: intro → menu → loading → lvl1.
+1. Clone the repository.
+2. Open the folder in Unity Hub with Unity **6000.3.8f1**.
+3. Wait for the import to finish (the project is heavy, about 2 GB of assets).
+4. Open `Assets/Scenes/intro.unity` and press Play. Build scene order: intro → menu → loading → lvl1.
 
-> У репозиторії немає вихідних архівів Blender з Backrooms-паку та сирих відеозаписів для трейлера — вони перевищують ліміт GitHub у 100 МБ на файл. На роботу проєкту це не впливає.
+> The repository does not include the Blender source archives from the Backrooms pack or the raw trailer footage: both exceed GitHub's 100 MB per-file limit. The project runs fine without them.
 
-## Керування
+## Controls
 
-| Клавіша | Дія |
+| Key | Action |
 |---|---|
-| W A S D | Рух |
-| Shift | Біг |
-| Space | Стрибок |
-| F | Ліхтарик |
-| E | Взаємодія |
-| Esc | Пауза / пропуск катсцени |
+| W A S D | Move |
+| Shift | Run |
+| Space | Jump |
+| F | Flashlight |
+| E | Interact |
+| Esc | Pause / skip cutscene |
 
-## Статус
+## Status
 
-Версія **0.1.5**, у розробці. Перший рівень грабельний, другий і третій — у роботі. Є тизер і матеріали для сторінки в Steam.
+Version **0.1.5**, in development. The first level is playable, the second and third are in progress. A teaser and Steam page materials are ready.
 
 ---
 
-Автор: **MORENTY** · Cult of Code
+Author: **MORENTY** · Cult of Code
