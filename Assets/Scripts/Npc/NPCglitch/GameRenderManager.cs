@@ -40,19 +40,23 @@ public class GameRenderManager : MonoBehaviour
 
         ApplyIntensity(currentIntensity);
 
-        // Сбрасываем targetIntensity — NPC будут добавлять в следующем кадре
-        targetIntensity = 0f;
-
-        // Управляем активностью эффекта
+        // Управляем активностью эффекта ДО сброса targetIntensity,
+        // иначе флаг никогда не станет true
         if (!isHackedActive && targetIntensity > 0f)
         {
             isHackedActive = true;
         }
-        else if (isHackedActive && targetIntensity == 0f && currentIntensity <= 0.01f)
+        else if (isHackedActive && targetIntensity <= 0f && currentIntensity <= 0.01f)
         {
             isHackedActive = false;
         }
+
+        // Сбрасываем targetIntensity — NPC будут добавлять в следующем кадре
+        targetIntensity = 0f;
     }
+
+    /// <summary>Активен ли сейчас глитч-эффект (кто-то из NPC в радиусе)</summary>
+    public bool IsHackedActive => isHackedActive;
 
     public void ReportIntensity(float intensity)
     {

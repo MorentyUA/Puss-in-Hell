@@ -92,11 +92,17 @@ public class HintMessageManager : MonoBehaviour
         if (messageCanvas != null)
             messageCanvas.gameObject.SetActive(false);
 
-        // Подписываемся на смену языка
-        if (GlobalSettingsManager.Instance != null)
-        {
-            GlobalSettingsManager.Instance.OnLanguageChanged.AddListener(OnLanguageChanged);
-        }
+        StartCoroutine(SubscribeToLanguageChanges());
+    }
+
+    // GlobalSettingsManager может появиться позже нас — ждём его, а не подписываемся вслепую в Awake
+    private IEnumerator SubscribeToLanguageChanges()
+    {
+        while (GlobalSettingsManager.Instance == null)
+            yield return null;
+
+        GlobalSettingsManager.Instance.OnLanguageChanged.RemoveListener(OnLanguageChanged);
+        GlobalSettingsManager.Instance.OnLanguageChanged.AddListener(OnLanguageChanged);
     }
 
     private void OnDestroy()
