@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5b15a540d666fe74088f3e64ee5bdb87
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258113
+  packageName: SAD - Emotional Main Menu Pack
+  packageVersion: 1.0
+  assetPath: Assets/GabrielBissonnette/Sad - Main Menu Pack/_essentials/Animations/ButtonLightText.controller
+  uploadId: 604229

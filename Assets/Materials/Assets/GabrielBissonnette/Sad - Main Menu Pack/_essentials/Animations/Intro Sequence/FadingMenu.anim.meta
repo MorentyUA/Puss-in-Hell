@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e437e185b68ea8d4abfdee32c48e0597
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258113
+  packageName: SAD - Emotional Main Menu Pack
+  packageVersion: 1.0
+  assetPath: Assets/GabrielBissonnette/Sad - Main Menu Pack/_essentials/Animations/Intro
+    Sequence/FadingMenu.anim
+  uploadId: 604229

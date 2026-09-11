@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 268924e5faf6a3646b9d23d2df747d88
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: hellacat(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Lights
+      parentName: hellacat(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere
+      parentName: hellacat(Clone)
+      position: {x: -0, y: -0.004343748, z: 0}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 84.73575, y: 96.25, z: 100}
+    - name: Sphere 2
+      parentName: hellacat(Clone)
+      position: {x: 0.0078167105, y: -0.056346577, z: 0.26928595}
+      rotation: {x: -0.000002516216, y: -0.0000025808733, z: 0.7147267, w: 0.6994039}
+      scale: {x: 100.00001, y: 100.00001, z: 100}
+    - name: Sphere 4
+      parentName: hellacat(Clone)
+      position: {x: 0.07495264, y: 0.12761512, z: 0.22222453}
+      rotation: {x: 0.6521158, y: 0, z: -0, w: 0.75811934}
+      scale: {x: 100, y: 99.99999, z: 99.99999}
+    - name: Sphere 5
+      parentName: hellacat(Clone)
+      position: {x: -0, y: -0.004343748, z: -0.19894534}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 84.73575, y: 96.25, z: 100}
+    - name: Sphere.001
+      parentName: hellacat(Clone)
+      position: {x: 0.0063199387, y: -0.23927358, z: 0.13081379}
+      rotation: {x: 0.036832783, y: 0, z: -0, w: 0.99932146}
+      scale: {x: 11.236305, y: 23.070236, z: 7.1224957}
+    - name: Sphere.002
+      parentName: hellacat(Clone)
+      position: {x: 0.254586, y: 0.0341192, z: 0.25202987}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 8.588867, y: 17.421385, z: 18.100143}
+    - name: Sphere.003
+      parentName: hellacat(Clone)
+      position: {x: 0.32482588, y: -0.33913, z: -0.09342106}
+      rotation: {x: 0.026745075, y: 0.010807752, z: 0.38718322, w: 0.92155147}
+      scale: {x: 99.99999, y: 99.999985, z: 99.999985}
+    - name: Sphere.004
+      parentName: hellacat(Clone)
+      position: {x: 0.00636563, y: -0.42721236, z: -0.02317538}
+      rotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+      scale: {x: 49.924625, y: 86.247894, z: 42.120136}
+    - name: Sphere.005
+      parentName: hellacat(Clone)
+      position: {x: 0.11474018, y: -0.7614003, z: 0.033220824}
+      rotation: {x: -0.1269666, y: 0.0105239665, z: 0.0045757494, w: 0.99184066}
+      scale: {x: 18.7123, y: 44.36472, z: 24.176481}
+    - name: Sphere.006
+      parentName: hellacat(Clone)
+      position: {x: 0.24542706, y: 0.023070313, z: -0.1174501}
+      rotation: {x: 0.06275388, y: 0, z: -0, w: 0.99802905}
+      scale: {x: 100, y: 99.99999, z: 99.99999}
+    - name: Sphere.007
+      parentName: hellacat(Clone)
+      position: {x: -0.2880937, y: 0.37944797, z: 0.17165847}
+      rotation: {x: -0.001540116, y: 0.024433894, z: 0.24442923, w: 0.969358}
+      scale: {x: 99.99999, y: 99.999985, z: 100.00001}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

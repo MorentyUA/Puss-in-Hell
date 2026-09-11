@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 95f7a5a38daa188488ebdb5699dfe250
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258113
+  packageName: SAD - Emotional Main Menu Pack
+  packageVersion: 1.0
+  assetPath: Assets/GabrielBissonnette/Sad - Main Menu Pack/Scripts/_menuAnimations.cs
+  uploadId: 604229

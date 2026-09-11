@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9f7b62e9450a5814d815a6d9306160a7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 293724
+  packageName: 'Glitches: Hacked'
+  packageVersion: 2.1.3
+  assetPath: Assets/FronkonGames/Glitches/Hacked/Editor/Internal/SupportWindow.cs
+  uploadId: 785156
