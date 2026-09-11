@@ -1,0 +1,50 @@
+# Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/Assets/AssetStoreTools*
+/Assets/Plugins/Editor/JetBrains*
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+sysinfo.txt
+*.apk
+*.aab
+*.unitypackage
+*.app
+crashlytics-build.properties
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
+Thumbs.db
+.DS_Store
+
+# Вихідні архіви Blender з Backrooms-паку (>100 МБ, Unity їх не імпортує)
+/Assets/Materials/Assets/Backrooms/BackroomsLikeAsset/BlendFile/*.zip
+/Assets/Materials/Assets/Backrooms/BackroomsLikeAsset/BlendFile/*.zip.meta
+
+# Сирі відеозаписи для трейлерів (300–450 МБ кожен)
+/Puss in Hell SEO/Исходники/
+/Puss in Hell SEO/opis.psd
