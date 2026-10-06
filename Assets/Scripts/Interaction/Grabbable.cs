@@ -22,7 +22,9 @@ namespace PussInHell.Interaction
         [Range(0f, 1f)]
         [SerializeField] private float handHeightFraction = 0.6f;
         [Tooltip("How far the hands stay off the surface")]
-        [SerializeField] private float surfaceOffset = 0.1f;
+        [SerializeField] private float surfaceOffset = 0.18f;
+        [Tooltip("Distance from the face to the player's centre while grabbing")]
+        [SerializeField] private float standDistance = 0.55f;
 
         [Header("Proximity")]
         [Tooltip("Player distance that counts as near (for highlights)")]
@@ -111,6 +113,17 @@ namespace PussInHell.Interaction
             Vector3 playerRight = Vector3.Cross(Vector3.up, -bestAxis).normalized;
             rightHand = faceCenter + playerRight * handSpacing * 0.5f;
             leftHand = faceCenter - playerRight * handSpacing * 0.5f;
+            return true;
+        }
+
+        public bool GetStandPoint(Vector3 playerPosition, out Vector3 standPoint, out Vector3 faceNormal)
+        {
+            standPoint = playerPosition;
+            if (!GetGrabPoints(playerPosition, out Vector3 left, out Vector3 right, out faceNormal)) return false;
+
+            Vector3 faceCenter = (left + right) * 0.5f - faceNormal * surfaceOffset;
+            standPoint = faceCenter + faceNormal * standDistance;
+            standPoint.y = playerPosition.y;
             return true;
         }
 

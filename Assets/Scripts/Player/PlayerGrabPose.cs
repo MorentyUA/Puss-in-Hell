@@ -13,6 +13,8 @@ namespace PussInHell.Player
         [SerializeField] private bool orientHands = true;
         [Tooltip("Extra rotation applied to the hands in the grab pose")]
         [SerializeField] private Vector3 handRotationOffset = Vector3.zero;
+        [Tooltip("How far a hand may move from its animated position")]
+        [SerializeField] private float maxHandReach = 0.45f;
 
         [Header("Lean")]
         [Tooltip("Body parts rotated around the hips to lean into the object")]
@@ -59,7 +61,11 @@ namespace PussInHell.Player
         {
             if (hand == null) return;
 
-            hand.position = Vector3.Lerp(hand.position, point, weight);
+            Vector3 rest = hand.position;
+            Vector3 offset = point - rest;
+            if (offset.magnitude > maxHandReach) point = rest + offset.normalized * maxHandReach;
+
+            hand.position = Vector3.Lerp(rest, point, weight);
             if (!orientHands) return;
 
             Vector3 toSurface = -grab.FaceNormal;

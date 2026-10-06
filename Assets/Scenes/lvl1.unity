@@ -29007,7 +29007,8 @@ MonoBehaviour:
   grabCollider: {fileID: 1468507535}
   handSpacing: 0.5
   handHeightFraction: 0.55
-  surfaceOffset: 0.1
+  surfaceOffset: 0.18
+  standDistance: 0.55
   nearRadius: 3
   onPlayerNear:
     m_PersistentCalls:

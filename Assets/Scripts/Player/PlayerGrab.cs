@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using PussInHell.Core;
@@ -25,9 +26,13 @@ namespace PussInHell.Player
         [Header("While Grabbing")]
         [Range(0.1f, 1f)]
         [SerializeField] private float speedMultiplier = 0.55f;
+        [Tooltip("Seconds to slide into the stand point before the joint is created")]
+        [SerializeField] private float attachDuration = 0.25f;
 
         private Rigidbody body;
         private FixedJoint joint;
+        private Coroutine attachRoutine;
+        private bool isAttaching;
 
         public Grabbable Current { get; private set; }
         public Grabbable Candidate { get; private set; }
@@ -76,25 +81,58 @@ namespace PussInHell.Player
 
         public void Grab(Grabbable grabbable)
         {
-            if (grabbable == null || IsGrabbing || grabbable.Body == null) return;
+            if (grabbable == null || IsGrabbing || isAttaching || grabbable.Body == null) return;
 
             Current = grabbable;
             Candidate = null;
             UpdateGrabPoints();
-
-            joint = gameObject.AddComponent<FixedJoint>();
-            joint.connectedBody = grabbable.Body;
-            joint.enableCollision = false;
+            grabbable.SetGrabbed(true);
 
             if (motor != null)
             {
+                motor.Stop();
                 motor.FacingTarget = grabbable.transform;
                 motor.SpeedMultiplier = speedMultiplier;
                 motor.AllowRun = false;
                 motor.AllowJump = false;
             }
 
-            grabbable.SetGrabbed(true);
+            attachRoutine = StartCoroutine(AttachRoutine(grabbable));
+        }
+
+        private IEnumerator AttachRoutine(Grabbable grabbable)
+        {
+            isAttaching = true;
+            if (motor != null) motor.enabled = false;
+
+            if (grabbable.GetStandPoint(transform.position, out Vector3 standPoint, out Vector3 normal))
+            {
+                Vector3 from = body.position;
+                Quaternion fromRotation = body.rotation;
+                Quaternion toRotation = Quaternion.LookRotation(-normal, Vector3.up);
+                float elapsed = 0f;
+                while (elapsed < attachDuration)
+                {
+                    elapsed += Time.fixedDeltaTime;
+                    float t = Mathf.Clamp01(elapsed / attachDuration);
+                    body.MovePosition(Vector3.Lerp(from, standPoint, t));
+                    body.MoveRotation(Quaternion.Slerp(fromRotation, toRotation, t));
+                    yield return new WaitForFixedUpdate();
+                }
+                body.position = standPoint;
+                body.rotation = toRotation;
+                body.linearVelocity = Vector3.zero;
+            }
+
+            joint = gameObject.AddComponent<FixedJoint>();
+            joint.connectedBody = grabbable.Body;
+            joint.enableCollision = false;
+
+            if (motor != null) motor.enabled = true;
+            isAttaching = false;
+            attachRoutine = null;
+            UpdateGrabPoints();
+
             Grabbed?.Invoke(grabbable);
             onGrabbed?.Invoke();
         }
@@ -105,6 +143,14 @@ namespace PussInHell.Player
 
             var released = Current;
             Current = null;
+
+            if (attachRoutine != null)
+            {
+                StopCoroutine(attachRoutine);
+                attachRoutine = null;
+                isAttaching = false;
+                if (motor != null) motor.enabled = true;
+            }
 
             if (joint != null)
             {
