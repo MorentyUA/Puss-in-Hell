@@ -46,6 +46,12 @@ namespace PussInHell.Player
         public bool IsMoving => IsWalking || IsRunning;
         public Transform GroundCheck => groundCheck;
         public Vector3 PlanarVelocity => new Vector3(currentVelocity.x, 0f, currentVelocity.z);
+        public Vector3 MoveDirection => targetDirection;
+
+        public Transform FacingTarget { get; set; }
+        public float SpeedMultiplier { get; set; } = 1f;
+        public bool AllowRun { get; set; } = true;
+        public bool AllowJump { get; set; } = true;
 
         public event Action Jumped;
 
@@ -85,14 +91,14 @@ namespace PussInHell.Player
             targetDirection = (forward * vertical + right * horizontal).normalized;
 
             bool hasInput = targetDirection.sqrMagnitude > 0.01f;
-            IsRunning = hasInput && IsGrounded && Input.GetKey(runKey);
+            IsRunning = hasInput && IsGrounded && AllowRun && Input.GetKey(runKey);
             IsWalking = hasInput && IsGrounded;
             if (hasInput) wasRunning = IsRunning;
 
-            float targetSpeed = IsRunning ? runSpeed : walkSpeed;
+            float targetSpeed = (IsRunning ? runSpeed : walkSpeed) * SpeedMultiplier;
             currentMaxSpeed = Mathf.Lerp(currentMaxSpeed, targetSpeed, acceleration * Time.deltaTime);
 
-            if (IsGrounded && Input.GetKeyDown(jumpKey))
+            if (IsGrounded && AllowJump && Input.GetKeyDown(jumpKey))
                 Jump();
         }
 
@@ -121,9 +127,15 @@ namespace PussInHell.Player
 
         private void Rotate()
         {
-            if (targetDirection.sqrMagnitude < 0.01f) return;
+            Vector3 lookDirection = targetDirection;
+            if (FacingTarget != null)
+            {
+                lookDirection = FacingTarget.position - transform.position;
+                lookDirection.y = 0f;
+            }
+            if (lookDirection.sqrMagnitude < 0.01f) return;
 
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
             float speed = IsRunning ? rotationSpeed * runRotationMultiplier : rotationSpeed;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.fixedDeltaTime);
         }

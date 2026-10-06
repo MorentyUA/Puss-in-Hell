@@ -28912,10 +28912,10 @@ PrefabInstance:
       addedObject: {fileID: 1468507538}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84e61cde94d61c6489dd93e66dc46f8e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1468507541}
+      addedObject: {fileID: 1468507542}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84e61cde94d61c6489dd93e66dc46f8e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1468507542}
+      addedObject: {fileID: 1468507545}
   m_SourcePrefab: {fileID: 100100000, guid: 84e61cde94d61c6489dd93e66dc46f8e, type: 3}
 --- !u!4 &1468507533 stripped
 Transform:
@@ -28957,8 +28957,8 @@ Rigidbody:
   m_GameObject: {fileID: 1468507534}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 1.5
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -28972,33 +28972,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1468507541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1468507534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  activationRadius: 3
-  requireInteractKey: 0
-  interactKey: 101
-  onRangeEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  onRangeExited:
-    m_PersistentCalls:
-      m_Calls: []
-  onActivated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1468507542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29011,10 +28987,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
-  interactable: {fileID: 1468507541}
+  interactable: {fileID: 0}
   outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   targetObjects:
   - {fileID: 1468507534}
+--- !u!114 &1468507545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468507534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b1817322349d847aad4a4a1352d747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.Grabbable
+  body: {fileID: 1468507538}
+  grabCollider: {fileID: 1468507535}
+  handSpacing: 0.5
+  handHeightFraction: 0.55
+  surfaceOffset: 0.1
+  nearRadius: 3
+  onPlayerNear:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1468507542}
+        m_TargetAssemblyTypeName: PussInHell.Interaction.OutlineHighlight, Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPlayerFar:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1468507542}
+        m_TargetAssemblyTypeName: PussInHell.Interaction.OutlineHighlight, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGrabbed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1468507542}
+        m_TargetAssemblyTypeName: PussInHell.Interaction.OutlineHighlight, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onReleased:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1476786111
 GameObject:
   m_ObjectHideFlags: 0
