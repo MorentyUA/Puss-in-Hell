@@ -14,6 +14,9 @@ namespace PussInHell.Cinematics
         [Header("Timing")]
         [Tooltip("Seconds between Play() and the jump")]
         [SerializeField] private float delay = 4f;
+        [Tooltip("0 = instant teleport, otherwise seconds of a visible rush to the destination")]
+        [SerializeField] private float dashDuration = 0.15f;
+        [SerializeField] private AnimationCurve dashCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
         [SerializeField] private bool once = true;
 
         [Header("Animation")]
@@ -25,21 +28,28 @@ namespace PussInHell.Cinematics
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip teleportSound;
 
+        [Header("Events")]
+        public UnityEvent onDashStarted;
         public UnityEvent onTeleported;
 
         private Coroutine routine;
+        private bool isDashing;
+        private float dashElapsed;
+        private Vector3 dashFromPosition;
+        private Quaternion dashFromRotation;
 
         public bool HasFired { get; private set; }
 
         public void Play()
         {
             if (once && HasFired) return;
-            if (routine != null || target == null || destination == null) return;
+            if (routine != null || isDashing || target == null || destination == null) return;
             routine = StartCoroutine(Routine());
         }
 
         public void Cancel()
         {
+            isDashing = false;
             if (routine == null) return;
             StopCoroutine(routine);
             routine = null;
@@ -48,17 +58,52 @@ namespace PussInHell.Cinematics
         public void TeleportNow()
         {
             Cancel();
-            Teleport();
+            Arrive();
         }
 
         private IEnumerator Routine()
         {
             if (delay > 0f) yield return new WaitForSeconds(delay);
             routine = null;
-            Teleport();
+            StartDash();
         }
 
-        private void Teleport()
+        private void StartDash()
+        {
+            if (target == null || destination == null) return;
+
+            onDashStarted?.Invoke();
+
+            if (dashDuration <= 0f)
+            {
+                Arrive();
+                return;
+            }
+
+            dashFromPosition = target.position;
+            dashFromRotation = target.rotation;
+            dashElapsed = 0f;
+            isDashing = true;
+        }
+
+        private void LateUpdate()
+        {
+            if (!isDashing) return;
+
+            dashElapsed += Time.deltaTime;
+            float t = dashCurve.Evaluate(Mathf.Clamp01(dashElapsed / dashDuration));
+            target.position = Vector3.LerpUnclamped(dashFromPosition, destination.position, t);
+            if (applyDestinationRotation)
+                target.rotation = Quaternion.SlerpUnclamped(dashFromRotation, destination.rotation, t);
+
+            if (dashElapsed >= dashDuration)
+            {
+                isDashing = false;
+                Arrive();
+            }
+        }
+
+        private void Arrive()
         {
             if (target == null || destination == null) return;
 
