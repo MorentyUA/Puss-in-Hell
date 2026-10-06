@@ -1566,7 +1566,7 @@ MonoBehaviour:
   deceleration: 15
   runDeceleration: 5
   jumpForce: 6
-  airControl: 100
+  airControl: 1
   rotationSpeed: 7
   runRotationMultiplier: 1.3
   groundCheck: {fileID: 3395264481118653354}
@@ -1743,7 +1743,8 @@ MonoBehaviour:
   maxGrabAngle: 75
   releaseDistance: 3.5
   grabKey: 101
-  speedMultiplier: 0.55
+  speedMultiplier: 0.8
+  attachDuration: 0.25
   onGrabbed:
     m_PersistentCalls:
       m_Calls: []
@@ -1765,8 +1766,10 @@ MonoBehaviour:
   grab: {fileID: 1876408362098159176}
   leftHand: {fileID: 6536147010616390496}
   rightHand: {fileID: 5728036303405650849}
-  orientHands: 1
-  handRotationOffset: {x: 0, y: 0, z: 0}
+  armAxis: {x: 0, y: 1, z: 0}
+  maxAimAngle: 100
+  shoulderReach: 0.2
+  leanArms: 1
   leanParts:
   - {fileID: 4778660572228973922}
   - {fileID: 9015035544006644067}

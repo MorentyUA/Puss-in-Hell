@@ -25,7 +25,7 @@ namespace PussInHell.Player
 
         [Header("While Grabbing")]
         [Range(0.1f, 1f)]
-        [SerializeField] private float speedMultiplier = 0.55f;
+        [SerializeField] private float speedMultiplier = 0.8f;
         [Tooltip("Seconds to slide into the stand point before the joint is created")]
         [SerializeField] private float attachDuration = 0.25f;
 
@@ -87,6 +87,7 @@ namespace PussInHell.Player
             Candidate = null;
             UpdateGrabPoints();
             grabbable.SetGrabbed(true);
+            SetCollisionIgnored(grabbable, true);
 
             if (motor != null)
             {
@@ -166,9 +167,21 @@ namespace PussInHell.Player
                 motor.AllowJump = true;
             }
 
+            SetCollisionIgnored(released, false);
             released.SetGrabbed(false);
             Released?.Invoke(released);
             onReleased?.Invoke();
+        }
+
+        private void SetCollisionIgnored(Grabbable grabbable, bool ignored)
+        {
+            if (grabbable == null) return;
+            foreach (var mine in GetComponentsInChildren<Collider>())
+            {
+                if (mine.isTrigger) continue;
+                foreach (var theirs in grabbable.Colliders)
+                    if (theirs != null && !theirs.isTrigger) Physics.IgnoreCollision(mine, theirs, ignored);
+            }
         }
 
         private void UpdateGrabPoints()

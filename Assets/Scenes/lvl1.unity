@@ -28957,7 +28957,7 @@ Rigidbody:
   m_GameObject: {fileID: 1468507534}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 1.5
+  m_LinearDamping: 0.3
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -29008,7 +29008,7 @@ MonoBehaviour:
   handSpacing: 0.5
   handHeightFraction: 0.55
   surfaceOffset: 0.18
-  standDistance: 0.55
+  standDistance: 0.35
   nearRadius: 3
   onPlayerNear:
     m_PersistentCalls:

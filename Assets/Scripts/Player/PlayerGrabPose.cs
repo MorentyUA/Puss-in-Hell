@@ -14,6 +14,8 @@ namespace PussInHell.Player
         [SerializeField] private Vector3 armAxis = Vector3.up;
         [Tooltip("Arms may rotate at most this far from their animated direction")]
         [SerializeField] private float maxAimAngle = 100f;
+        [Tooltip("Shoulder slides this far toward the grab point when the arm is too short")]
+        [SerializeField] private float shoulderReach = 0.2f;
         [Tooltip("Arms lean together with the body before aiming")]
         [SerializeField] private bool leanArms = true;
 
@@ -86,7 +88,12 @@ namespace PussInHell.Player
             Vector3 currentDirection = -hand.TransformDirection(armAxis).normalized;
             Vector3 desiredDirection = point - shoulder;
             if (desiredDirection.sqrMagnitude < 0.0001f) return;
+
+            float armLength = hand.TransformVector(shoulderLocal).magnitude;
+            float shortBy = desiredDirection.magnitude - armLength;
             desiredDirection.Normalize();
+            if (shortBy > 0f)
+                shoulder += desiredDirection * Mathf.Min(shortBy, shoulderReach) * weight;
 
             float angle = Vector3.Angle(currentDirection, desiredDirection);
             if (angle > maxAimAngle)

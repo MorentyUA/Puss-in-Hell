@@ -37,6 +37,7 @@ namespace PussInHell.Interaction
         public UnityEvent onReleased;
 
         public Rigidbody Body => body;
+        public Collider[] Colliders => GetComponentsInChildren<Collider>();
         public bool IsGrabbed { get; private set; }
         public bool IsPlayerNear { get; private set; }
 
