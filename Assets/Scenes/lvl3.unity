@@ -315,6 +315,7 @@ MonoBehaviour:
   bobFrequency: 2
   bobHorizontalAmplitude: 0.05
   bobVerticalAmplitude: 0.1
+  manageCursor: 1
 --- !u!1 &116926568
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +396,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &116926571
 MeshFilter:
@@ -666,9 +668,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GabrielBissonnette.SAD.PauseMenuManager
   pauseMenuCanvas: {fileID: 0}
+  pauseKey: 27
+  menuSceneName: menu
   resumeButton: {fileID: 0}
   settingsButton: {fileID: 0}
   quitButton: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  uiAudioSource: {fileID: 0}
   clickSound: {fileID: 0}
   openSound: {fileID: 0}
   closeSound: {fileID: 0}
@@ -781,6 +787,7 @@ MonoBehaviour:
   Gif: {fileID: 11400000, guid: 4d63d917690ff34418cb33e96c896ea3, type: 2}
 --- !u!212 &297912711
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -826,6 +833,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6519f4def6580214f860fd2168cc306e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -835,7 +843,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &334835906 stripped
 GameObject:
@@ -1018,14 +1025,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.5377358, g: 0.4692506, b: 0.4692506, a: 1}
   m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -1679,6 +1686,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1937249063}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937249073}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937249072}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937249071}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937249070}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937249069}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1937249068}
     - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1120354644}
@@ -2106,7 +2131,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &657614279
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2152,6 +2177,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -2183,7 +2209,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!198 &657614280
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -7029,7 +7054,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &740939264
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7075,6 +7100,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -7106,7 +7132,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!198 &740939265
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -13299,6 +13324,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1267395091
 MeshFilter:
@@ -13507,14 +13533,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294349826}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 60
   m_InnerSpotAngle: 0
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 1
     m_Resolution: -1
@@ -13972,7 +13998,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1671749825
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -14018,6 +14044,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -14049,7 +14076,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!198 &1671749826
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -18890,7 +18916,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1728835708
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -18936,6 +18962,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -18967,7 +18994,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!198 &1728835709
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -23751,6 +23777,7 @@ MonoBehaviour:
   Gif: {fileID: 11400000, guid: 4d63d917690ff34418cb33e96c896ea3, type: 2}
 --- !u!212 &1852343498
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -23796,6 +23823,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6519f4def6580214f860fd2168cc306e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -23805,7 +23833,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1858078261
 GameObject:
@@ -23842,7 +23869,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1858078263
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -23888,6 +23915,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -23919,7 +23947,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!198 &1858078264
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -29064,39 +29091,21 @@ MonoBehaviour:
   jumpForce: 6
   airControl: 100
   rotationSpeed: 7
+  runRotationMultiplier: 1.3
   groundCheck: {fileID: 144391014}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 448
-  animator: {fileID: 1937249063}
   useMainCamera: 1
   cameraTransform: {fileID: 90412174}
-  footstepLayers:
-  - layer:
-      serializedVersion: 2
-      m_Bits: 64
-    source: {fileID: 1313508105}
-    clips:
-    - {fileID: 8300000, guid: 860b007656b0a3b4295efd7a8e30f8e4, type: 3}
-    - {fileID: 8300000, guid: ac544a706b4bf7f43a9b7452750586b6, type: 3}
-    - {fileID: 8300000, guid: 8613bdd52d064e245847b0b4cfc67326, type: 3}
-    - {fileID: 8300000, guid: 99503aefbd94f0d4c8a3a5987593df13, type: 3}
-    - {fileID: 8300000, guid: 71305aa66db099043b5b264403094a97, type: 3}
-    - {fileID: 8300000, guid: 88927c01c2d1169449085480131672d1, type: 3}
-    - {fileID: 8300000, guid: 0711dcb5c86e5a7479bf867287196e95, type: 3}
-    currentIndex: 0
-  - layer:
-      serializedVersion: 2
-      m_Bits: 768
-    source: {fileID: 1292915393}
-    clips:
-    - {fileID: 8300000, guid: a42f57f0c40e93545b7a7b0954ed46b4, type: 3}
-    - {fileID: 8300000, guid: 027dcd124a0145848bb46506f396ccec, type: 3}
-    currentIndex: 0
+  runKey: 304
+  jumpKey: 32
+  animator: {fileID: 0}
+  footstepLayers: []
   fearThreshold: 0.1
-  fearEffect1: {fileID: 297912708}
-  fearEffect2: {fileID: 1852343495}
+  fearEffect1: {fileID: 0}
+  fearEffect2: {fileID: 0}
   afkTriggerTime: 5
   afkCooldown: 10
 --- !u!114 &1937249065
@@ -29112,14 +29121,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlashlightToggle
   isAvailable: 0
-  flashlightObject: {fileID: 334835906}
-  lightObject: {fileID: 1294349826}
-  animator: {fileID: 1937249063}
+  toggleKey: 102
+  toggleCooldown: 0.3
+  flashlightObject: {fileID: 0}
+  lightObject: {fileID: 0}
+  animator: {fileID: 0}
   lightObjectDelay: 0.5
   turnOffDelay: 0.3
-  audioSource: {fileID: 334835908}
-  lightOnSound: {fileID: 8300000, guid: c2e3cc592074bde4f9d620090f157037, type: 3}
-  lightOffSound: {fileID: 8300000, guid: d5e47470bddf7cf4a9f6000550c1ccfd, type: 3}
+  audioSource: {fileID: 0}
+  lightOnSound: {fileID: 0}
+  lightOffSound: {fileID: 0}
 --- !u!54 &1937249066
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29170,6 +29181,132 @@ CapsuleCollider:
   m_Height: 1.2039576
   m_Direction: 1
   m_Center: {x: 0, y: -0.10197878, z: 0}
+--- !u!114 &1937249068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937249061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f139618ee68341f43ba78da96352850b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.FlashlightView
+  flashlight: {fileID: 1937249065}
+  flashlightObject: {fileID: 334835906}
+  lightObject: {fileID: 1294349826}
+  animator: {fileID: 1937249063}
+  onTrigger: flashlightOn
+  offTrigger: flashlightOff
+  lightObjectDelay: 0.5
+  turnOffDelay: 0.3
+  audioSource: {fileID: 334835908}
+  lightOnSound: {fileID: 8300000, guid: c2e3cc592074bde4f9d620090f157037, type: 3}
+  lightOffSound: {fileID: 8300000, guid: d5e47470bddf7cf4a9f6000550c1ccfd, type: 3}
+--- !u!114 &1937249069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937249061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8442dbd45fe901746868f33c0aafdf6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFootsteps
+  motor: {fileID: 1937249064}
+  probeDistance: 1
+  footstepLayers:
+  - layer:
+      serializedVersion: 2
+      m_Bits: 64
+    source: {fileID: 1313508105}
+    clips:
+    - {fileID: 8300000, guid: 860b007656b0a3b4295efd7a8e30f8e4, type: 3}
+    - {fileID: 8300000, guid: ac544a706b4bf7f43a9b7452750586b6, type: 3}
+    - {fileID: 8300000, guid: 8613bdd52d064e245847b0b4cfc67326, type: 3}
+    - {fileID: 8300000, guid: 99503aefbd94f0d4c8a3a5987593df13, type: 3}
+    - {fileID: 8300000, guid: 71305aa66db099043b5b264403094a97, type: 3}
+    - {fileID: 8300000, guid: 88927c01c2d1169449085480131672d1, type: 3}
+    - {fileID: 8300000, guid: 0711dcb5c86e5a7479bf867287196e95, type: 3}
+    currentIndex: 0
+  - layer:
+      serializedVersion: 2
+      m_Bits: 768
+    source: {fileID: 1292915393}
+    clips:
+    - {fileID: 8300000, guid: a42f57f0c40e93545b7a7b0954ed46b4, type: 3}
+    - {fileID: 8300000, guid: 027dcd124a0145848bb46506f396ccec, type: 3}
+    currentIndex: 0
+--- !u!114 &1937249070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937249061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc8ac30f00397b4c9955d5819103d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerAnimationView
+  animator: {fileID: 1937249063}
+  motor: {fileID: 1937249064}
+  fearState: {fileID: 1937249073}
+  idleBehaviour: {fileID: 1937249072}
+  walkParameter: walk
+  runParameter: run
+  jumpTrigger: jump
+  fearParameter: fear
+  idleTriggers:
+  - afk
+  - afk2
+--- !u!114 &1937249071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937249061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea07cb2d2d5f02b4886cdc5d58cf5cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFearEffects
+  fearState: {fileID: 1937249073}
+  effects:
+  - {fileID: 297912708}
+  - {fileID: 1852343495}
+--- !u!114 &1937249072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937249061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4b9779c8babec4db420f761d8b3e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerIdleBehaviour
+  motor: {fileID: 1937249064}
+  afkTriggerTime: 5
+  afkCooldown: 10
+--- !u!114 &1937249073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937249061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a72fc65bf75cdc409f555757d4e2d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFearState
+  fearThreshold: 0.1
 --- !u!1 &2036147121 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 0ee78a4d576343145b941b9999014e56, type: 3}

@@ -2,108 +2,90 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Через delay секунд после Play() мгновенно переносит target в точку destination
-/// (резкий «рывок» монстра к окну и т.п.). Удобно вешать на событие CameraDollyShot.onStarted.
-/// </summary>
-public class DelayedTeleport : MonoBehaviour
+namespace PussInHell.Cinematics
 {
-    [Header("Кого и куда")]
-    [SerializeField] private Transform target;
-    [Tooltip("Точка назначения: позиция и, если включено ниже, поворот")]
-    [SerializeField] private Transform destination;
-    [SerializeField] private bool applyDestinationRotation = true;
-
-    [Header("Тайминг")]
-    [Tooltip("Секунд от Play() до рывка")]
-    [SerializeField] private float delay = 4f;
-    [Tooltip("Сработать только один раз за сцену")]
-    [SerializeField] private bool once = true;
-
-    [Header("Анимация (опционально)")]
-    [SerializeField] private Animator animator;
-    [Tooltip("Триггер аниматора в момент рывка. Пусто — не дёргать.")]
-    [SerializeField] private string animatorTrigger = "";
-
-    [Header("Звук (опционально)")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip teleportSound;
-
-    [Header("События")]
-    public UnityEvent onTeleported;
-
-    private Coroutine routine;
-    private bool hasFired;
-
-    public bool HasFired => hasFired;
-
-    public void Play()
+    public class DelayedTeleport : MonoBehaviour
     {
-        if (once && hasFired) return;
-        if (routine != null) return;
-        if (target == null || destination == null) return;
+        [Header("Target")]
+        [SerializeField] private Transform target;
+        [SerializeField] private Transform destination;
+        [SerializeField] private bool applyDestinationRotation = true;
 
-        routine = StartCoroutine(Routine());
-    }
+        [Header("Timing")]
+        [Tooltip("Seconds between Play() and the jump")]
+        [SerializeField] private float delay = 4f;
+        [SerializeField] private bool once = true;
 
-    public void Cancel()
-    {
-        if (routine != null)
+        [Header("Animation")]
+        [SerializeField] private Animator animator;
+        [Tooltip("Animator trigger fired at the jump. Empty: none.")]
+        [SerializeField] private string animatorTrigger = "";
+
+        [Header("Audio")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip teleportSound;
+
+        public UnityEvent onTeleported;
+
+        private Coroutine routine;
+
+        public bool HasFired { get; private set; }
+
+        public void Play()
         {
+            if (once && HasFired) return;
+            if (routine != null || target == null || destination == null) return;
+            routine = StartCoroutine(Routine());
+        }
+
+        public void Cancel()
+        {
+            if (routine == null) return;
             StopCoroutine(routine);
             routine = null;
         }
-    }
 
-    /// <summary>Рывок прямо сейчас, без задержки.</summary>
-    public void TeleportNow()
-    {
-        Cancel();
-        DoTeleport();
-    }
-
-    private IEnumerator Routine()
-    {
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
-
-        routine = null;
-        DoTeleport();
-    }
-
-    private void DoTeleport()
-    {
-        if (target == null || destination == null) return;
-
-        if (applyDestinationRotation)
-            target.SetPositionAndRotation(destination.position, destination.rotation);
-        else
-            target.position = destination.position;
-
-        var rb = target.GetComponent<Rigidbody>();
-        if (rb != null)
+        public void TeleportNow()
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            Cancel();
+            Teleport();
         }
 
-        if (animator != null && !string.IsNullOrEmpty(animatorTrigger))
-            animator.SetTrigger(animatorTrigger);
+        private IEnumerator Routine()
+        {
+            if (delay > 0f) yield return new WaitForSeconds(delay);
+            routine = null;
+            Teleport();
+        }
 
-        if (audioSource != null && teleportSound != null)
-            audioSource.PlayOneShot(teleportSound);
+        private void Teleport()
+        {
+            if (target == null || destination == null) return;
 
-        hasFired = true;
-        onTeleported?.Invoke();
-    }
+            if (applyDestinationRotation) target.SetPositionAndRotation(destination.position, destination.rotation);
+            else target.position = destination.position;
 
-    private void OnDrawGizmosSelected()
-    {
-        if (target == null || destination == null) return;
+            var body = target.GetComponent<Rigidbody>();
+            if (body != null)
+            {
+                body.linearVelocity = Vector3.zero;
+                body.angularVelocity = Vector3.zero;
+            }
 
-        Gizmos.color = hasFired ? Color.green : Color.magenta;
-        Gizmos.DrawLine(target.position, destination.position);
-        Gizmos.DrawWireSphere(destination.position, 0.3f);
-        Gizmos.DrawRay(destination.position, destination.forward * 1.5f);
+            if (animator != null && !string.IsNullOrEmpty(animatorTrigger)) animator.SetTrigger(animatorTrigger);
+            if (audioSource != null && teleportSound != null) audioSource.PlayOneShot(teleportSound);
+
+            HasFired = true;
+            onTeleported?.Invoke();
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (target == null || destination == null) return;
+            Gizmos.color = HasFired ? Color.green : Color.magenta;
+            Gizmos.DrawLine(target.position, destination.position);
+            Gizmos.DrawWireSphere(destination.position, 0.3f);
+            Gizmos.DrawRay(destination.position, destination.forward * 1.5f);
+        }
     }
 }

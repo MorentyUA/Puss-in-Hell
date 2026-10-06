@@ -1826,11 +1826,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92115614}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &98365673 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 962177427705667694, guid: ce05e0324e18dd3459c1082a9db9ccd0, type: 3}
-  m_PrefabInstance: {fileID: 9087364144627829778}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &100269343 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 759833800247620209, guid: 0478957e3fecb2e40a8300bd5e8b3fb7, type: 3}
@@ -2597,6 +2592,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 62123768594099148, guid: 39082e1a4c9dd8d4f9eb27b338daa3a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 430206066}
+    - targetCorrespondingSourceObject: {fileID: 62123768594099148, guid: 39082e1a4c9dd8d4f9eb27b338daa3a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 430206067}
   m_SourcePrefab: {fileID: 100100000, guid: 39082e1a4c9dd8d4f9eb27b338daa3a7, type: 3}
 --- !u!1 &120666294 stripped
 GameObject:
@@ -3341,6 +3339,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 172585955}
+    - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 172585957}
   m_SourcePrefab: {fileID: 100100000, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
 --- !u!4 &172585953 stripped
 Transform:
@@ -3367,11 +3368,34 @@ MonoBehaviour:
   moveSpeed: 2
   wanderTime: 2
   idleTime: 2
-  surfaceCheckDistance: 2
   directionChangeInterval: 0.5
+  turnSpeed: 5
+  surfaceCheckDistance: 2
   surfaceLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  audioSource: {fileID: 0}
+  scuttleClips: []
+--- !u!95 &172585956 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2459871616111096729, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+  m_PrefabInstance: {fileID: 172585952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &172585957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172585954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5988d9aab2555f04f87f6116526b5f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Npc.CockroachView
+  wander: {fileID: 172585955}
+  animator: {fileID: 172585956}
+  moveParameter: move
   audioSource: {fileID: 0}
   scuttleClips: []
 --- !u!1 &175766425 stripped
@@ -6535,6 +6559,7 @@ GameObject:
   - component: {fileID: 361557206}
   - component: {fileID: 361557209}
   - component: {fileID: 361557208}
+  - component: {fileID: 361557210}
   m_Layer: 0
   m_Name: "\u0421atScene2"
   m_TagString: Untagged
@@ -6688,18 +6713,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ca9d302a42df448bf35276931c798b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneActivator
-  requiredHighlighters:
+  player: {fileID: 361557210}
+  requiredInteractables:
   - {fileID: 656968372}
   - {fileID: 1904274917}
   - {fileID: 430206066}
-  timeline: {fileID: 361557206}
-  cutsceneCamera: {fileID: 1476786113}
-  cutsceneAudioSource: {fileID: 361557208}
+  triggerOnce: 1
+  timeline: {fileID: 0}
+  cutsceneCamera: {fileID: 0}
+  cutsceneAudioSource: {fileID: 0}
   stopAudioOnEnd: 0
   allowSkip: 0
   skipKey: 27
-  triggerOnce: 1
-  playerTag: Player
+  onCutsceneStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCutsceneEnded:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &361557210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361557205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f851c698920da8647a5de46f5db4d862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Cinematics.CutscenePlayer
+  timeline: {fileID: 361557206}
+  cutsceneCamera: {fileID: 1476786113}
+  cameraPriority: 100
+  cutToCamera: 1
+  audioSource: {fileID: 361557208}
+  stopAudioOnEnd: 0
+  allowSkip: 0
+  skipKey: 27
   onCutsceneStarted:
     m_PersistentCalls:
       m_Calls:
@@ -6718,7 +6769,6 @@ MonoBehaviour:
   onCutsceneEnded:
     m_PersistentCalls:
       m_Calls: []
-  showDebugLogs: 0
 --- !u!1 &362653973
 GameObject:
   m_ObjectHideFlags: 0
@@ -6896,6 +6946,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 364352150}
+    - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 364352152}
   m_SourcePrefab: {fileID: 100100000, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
 --- !u!4 &364352148 stripped
 Transform:
@@ -6922,11 +6975,34 @@ MonoBehaviour:
   moveSpeed: 2
   wanderTime: 2
   idleTime: 2
-  surfaceCheckDistance: 2
   directionChangeInterval: 0.5
+  turnSpeed: 5
+  surfaceCheckDistance: 2
   surfaceLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  audioSource: {fileID: 0}
+  scuttleClips: []
+--- !u!95 &364352151 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2459871616111096729, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+  m_PrefabInstance: {fileID: 364352147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &364352152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364352149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5988d9aab2555f04f87f6116526b5f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Npc.CockroachView
+  wander: {fileID: 364352150}
+  animator: {fileID: 364352151}
+  moveParameter: move
   audioSource: {fileID: 0}
   scuttleClips: []
 --- !u!1 &366007008
@@ -6975,6 +7051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YourNamespace.TextTriggerDisplay
   tmpText: {fileID: 1461589552}
+  visibleAlpha: 0.1
   fadeInDuration: 0.5
   displayDuration: 5
   fadeOutDuration: 0.5
@@ -7019,6 +7096,7 @@ GameObject:
   - component: {fileID: 371766288}
   - component: {fileID: 371766287}
   - component: {fileID: 371766286}
+  - component: {fileID: 371766290}
   m_Layer: 0
   m_Name: Hint
   m_TagString: Untagged
@@ -7217,19 +7295,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveHint
   interactionRadius: 5
-  disappearDistance: 0.1
   pulseDistance: 2
+  disappearDistance: 0.1
+  isOneTimeInteract: 1
+  interactKey: 101
+  messageKey: PC
+  messageDuration: 5
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  hintSprite: {fileID: 0}
+  hintText: {fileID: 0}
   pulseScale: 4
   pulseSpeed: 3
   pulseAmount: 0.02
-  hintSprite: {fileID: 371766288}
-  player: {fileID: 1632968557}
-  hintText: {fileID: 0}
   fadeSpeed: 15
   rotationSpeed: 5
-  isOneTimeInteract: 1
-  messageKey: PC
-  messageDuration: 5
+  audioSource: {fileID: 0}
+  interactSound: {fileID: 0}
+--- !u!114 &371766290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371766284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9361822467db7b041adf0da14492c1cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.HintSpriteView
+  hint: {fileID: 371766289}
+  hintSprite: {fileID: 371766288}
+  hintText: {fileID: 0}
+  visibleAlpha: 0.5
+  fadeSpeed: 15
+  rotationSpeed: 5
+  pulseScale: 4
+  pulseSpeed: 3
+  pulseAmount: 0.02
+  scaleLerpSpeed: 4
   audioSource: {fileID: 1995321958}
   interactSound: {fileID: 8300000, guid: 3fbcd960e4e682d41b0aec004ef8aa27, type: 3}
 --- !u!1001 &377304607
@@ -7688,6 +7793,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 406180405}
+    - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 406180407}
   m_SourcePrefab: {fileID: 100100000, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
 --- !u!4 &406180403 stripped
 Transform:
@@ -7714,11 +7822,34 @@ MonoBehaviour:
   moveSpeed: 2
   wanderTime: 2
   idleTime: 2
-  surfaceCheckDistance: 2
   directionChangeInterval: 0.5
+  turnSpeed: 5
+  surfaceCheckDistance: 2
   surfaceLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  audioSource: {fileID: 0}
+  scuttleClips: []
+--- !u!95 &406180406 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2459871616111096729, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+  m_PrefabInstance: {fileID: 406180402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &406180407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406180404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5988d9aab2555f04f87f6116526b5f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Npc.CockroachView
+  wander: {fileID: 406180405}
+  animator: {fileID: 406180406}
+  moveParameter: move
   audioSource: {fileID: 0}
   scuttleClips: []
 --- !u!1 &410087039
@@ -8002,16 +8133,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 120666294}
   requireInteractKey: 1
   interactKey: 101
-  player: {fileID: 98365673}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
   onActivated:
     m_PersistentCalls:
       m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &430206067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120666294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 430206066}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 120666294}
 --- !u!1 &434810662
 GameObject:
   m_ObjectHideFlags: 0
@@ -9830,6 +9981,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2de3de2b69978494aaa528783693f270, type: 3}
       insertIndex: -1
       addedObject: {fileID: 656968372}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2de3de2b69978494aaa528783693f270, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 656968373}
     - targetCorrespondingSourceObject: {fileID: 7602792752269151372, guid: 2de3de2b69978494aaa528783693f270, type: 3}
       insertIndex: -1
       addedObject: {fileID: 26015663}
@@ -11038,6 +11192,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 640273171}
+    - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 640273173}
   m_SourcePrefab: {fileID: 100100000, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
 --- !u!4 &640273169 stripped
 Transform:
@@ -11064,11 +11221,34 @@ MonoBehaviour:
   moveSpeed: 2
   wanderTime: 2
   idleTime: 2
-  surfaceCheckDistance: 2
   directionChangeInterval: 0.5
+  turnSpeed: 5
+  surfaceCheckDistance: 2
   surfaceLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  audioSource: {fileID: 0}
+  scuttleClips: []
+--- !u!95 &640273172 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2459871616111096729, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+  m_PrefabInstance: {fileID: 640273168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &640273173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640273170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5988d9aab2555f04f87f6116526b5f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Npc.CockroachView
+  wander: {fileID: 640273171}
+  animator: {fileID: 640273172}
+  moveParameter: move
   audioSource: {fileID: 0}
   scuttleClips: []
 --- !u!1 &646374618
@@ -11404,8 +11584,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 2
+  requireInteractKey: 1
+  interactKey: 101
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &656968373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656968371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 656968372}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   targetObjects:
   - {fileID: 26015659}
   - {fileID: 1031002701}
@@ -11415,12 +11621,6 @@ MonoBehaviour:
   - {fileID: 1353247218}
   - {fileID: 1048237778}
   - {fileID: 2024933931}
-  requireInteractKey: 1
-  interactKey: 101
-  player: {fileID: 98365673}
-  onActivated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &674347128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11540,6 +11740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678387720}
   - component: {fileID: 678387719}
+  - component: {fileID: 678387721}
   m_Layer: 0
   m_Name: HintMessageManager
   m_TagString: Untagged
@@ -11559,11 +11760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d28a5c20c9735f48a7f1f77be096168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HintMessageManager
-  messageCanvas: {fileID: 2145717997}
-  messageText: {fileID: 1021965323}
   defaultMessageDuration: 5
-  fadeInDuration: 0.5
-  fadeOutDuration: 0.5
   localizedMessages:
   - key: Banny
     russian: "\u041C\u0438\u043B\u044B\u0439...\u0434\u043E \u0442\u0435\u0445 \u043F\u043E\u0440,
@@ -11619,6 +11816,10 @@ MonoBehaviour:
     italian: Dannata cosa, ha inghiottito di nuovo il mio disco. Macchina selvaggia.
     polish: "Cholerne ustrojstwo znowu po\u0142kn\u0119\u0142o m\xF3j dysk. Dzika
       maszyna."
+  messageCanvas: {fileID: 0}
+  messageText: {fileID: 0}
+  fadeInDuration: 0.5
+  fadeOutDuration: 0.5
 --- !u!4 &678387720
 Transform:
   m_ObjectHideFlags: 0
@@ -11635,6 +11836,23 @@ Transform:
   - {fileID: 366007009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &678387721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678387718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a77deb495dc0d48a8198208c122c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Hints.HintMessageView
+  service: {fileID: 678387719}
+  messageCanvas: {fileID: 2145717997}
+  messageText: {fileID: 1021965323}
+  fadeInDuration: 0.5
+  fadeOutDuration: 0.5
 --- !u!1 &682392459
 GameObject:
   m_ObjectHideFlags: 0
@@ -15800,6 +16018,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 858149834}
+    - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 858149836}
   m_SourcePrefab: {fileID: 100100000, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
 --- !u!4 &858149832 stripped
 Transform:
@@ -15826,11 +16047,34 @@ MonoBehaviour:
   moveSpeed: 2
   wanderTime: 2
   idleTime: 2
-  surfaceCheckDistance: 2
   directionChangeInterval: 0.5
+  turnSpeed: 5
+  surfaceCheckDistance: 2
   surfaceLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  audioSource: {fileID: 0}
+  scuttleClips: []
+--- !u!95 &858149835 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2459871616111096729, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+  m_PrefabInstance: {fileID: 858149831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &858149836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858149833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5988d9aab2555f04f87f6116526b5f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Npc.CockroachView
+  wander: {fileID: 858149834}
+  animator: {fileID: 858149835}
+  moveParameter: move
   audioSource: {fileID: 0}
   scuttleClips: []
 --- !u!1 &860293787 stripped
@@ -16780,6 +17024,7 @@ GameObject:
   - component: {fileID: 919294896}
   - component: {fileID: 919294899}
   - component: {fileID: 919294898}
+  - component: {fileID: 919294900}
   m_Layer: 8
   m_Name: Hint
   m_TagString: Untagged
@@ -16878,21 +17123,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveHint
   interactionRadius: 5
-  disappearDistance: 0.1
   pulseDistance: 3
+  disappearDistance: 0.1
+  isOneTimeInteract: 1
+  interactKey: 101
+  messageKey: Banny
+  messageDuration: 5
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  hintSprite: {fileID: 0}
+  hintText: {fileID: 0}
   pulseScale: 4
   pulseSpeed: 3
   pulseAmount: 0.02
-  hintSprite: {fileID: 919294896}
-  player: {fileID: 1632968557}
-  hintText: {fileID: 0}
   fadeSpeed: 15
   rotationSpeed: 5
-  isOneTimeInteract: 1
-  messageKey: Banny
-  messageDuration: 5
-  audioSource: {fileID: 1995321958}
-  interactSound: {fileID: 8300000, guid: 5e2029a813b689d4cb49a0775ead2ec1, type: 3}
+  audioSource: {fileID: 0}
+  interactSound: {fileID: 0}
 --- !u!114 &919294898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16993,6 +17241,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919294894}
   m_CullTransparentMesh: 1
+--- !u!114 &919294900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919294894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9361822467db7b041adf0da14492c1cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.HintSpriteView
+  hint: {fileID: 919294897}
+  hintSprite: {fileID: 919294896}
+  hintText: {fileID: 0}
+  visibleAlpha: 0.5
+  fadeSpeed: 15
+  rotationSpeed: 5
+  pulseScale: 4
+  pulseSpeed: 3
+  pulseAmount: 0.02
+  scaleLerpSpeed: 4
+  audioSource: {fileID: 1995321958}
+  interactSound: {fileID: 8300000, guid: 5e2029a813b689d4cb49a0775ead2ec1, type: 3}
 --- !u!1 &920299713
 GameObject:
   m_ObjectHideFlags: 0
@@ -17055,8 +17327,6 @@ MonoBehaviour:
   cutOnStart: 1
   cutOnEnd: 0
   directorToStop: {fileID: 361557206}
-  disablePlayerControl: 1
-  playerTag: Player
   allowSkip: 0
   skipKey: 27
   onStarted:
@@ -23170,6 +23440,7 @@ MonoBehaviour:
   audioSource: {fileID: 1185335500}
   delay: 2
   fadeTime: 0.5
+  targetVolume: 1
 --- !u!1 &1187015350 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6562766153639442925, guid: 260a3460f66fd4f47a901a3ee4900f49, type: 3}
@@ -28310,6 +28581,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84e61cde94d61c6489dd93e66dc46f8e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1468507541}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84e61cde94d61c6489dd93e66dc46f8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1468507542}
   m_SourcePrefab: {fileID: 100100000, guid: 84e61cde94d61c6489dd93e66dc46f8e, type: 3}
 --- !u!4 &1468507533 stripped
 Transform:
@@ -28381,16 +28655,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 1468507534}
   requireInteractKey: 0
   interactKey: 101
-  player: {fileID: 98365673}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
   onActivated:
     m_PersistentCalls:
       m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &1468507542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468507534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 1468507541}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 1468507534}
 --- !u!1 &1476786111
 GameObject:
   m_ObjectHideFlags: 0
@@ -30022,6 +30316,7 @@ GameObject:
   - component: {fileID: 1563909751}
   - component: {fileID: 1563909754}
   - component: {fileID: 1563909753}
+  - component: {fileID: 1563909755}
   m_Layer: 0
   m_Name: Hint
   m_TagString: Untagged
@@ -30120,21 +30415,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveHint
   interactionRadius: 5
-  disappearDistance: 0.1
   pulseDistance: 2
+  disappearDistance: 0.1
+  isOneTimeInteract: 1
+  interactKey: 101
+  messageKey: Pepelnica
+  messageDuration: 5
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  hintSprite: {fileID: 0}
+  hintText: {fileID: 0}
   pulseScale: 4
   pulseSpeed: 3
   pulseAmount: 0.02
-  hintSprite: {fileID: 1563909751}
-  player: {fileID: 1632968557}
-  hintText: {fileID: 0}
   fadeSpeed: 15
   rotationSpeed: 5
-  isOneTimeInteract: 1
-  messageKey: Pepelnica
-  messageDuration: 5
-  audioSource: {fileID: 1995321958}
-  interactSound: {fileID: 8300000, guid: 12041817b0e565744947fe00b76d7e3e, type: 3}
+  audioSource: {fileID: 0}
+  interactSound: {fileID: 0}
 --- !u!114 &1563909753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30235,6 +30533,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563909749}
   m_CullTransparentMesh: 1
+--- !u!114 &1563909755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563909749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9361822467db7b041adf0da14492c1cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.HintSpriteView
+  hint: {fileID: 1563909752}
+  hintSprite: {fileID: 1563909751}
+  hintText: {fileID: 0}
+  visibleAlpha: 0.5
+  fadeSpeed: 15
+  rotationSpeed: 5
+  pulseScale: 4
+  pulseSpeed: 3
+  pulseAmount: 0.02
+  scaleLerpSpeed: 4
+  audioSource: {fileID: 1995321958}
+  interactSound: {fileID: 8300000, guid: 12041817b0e565744947fe00b76d7e3e, type: 3}
 --- !u!64 &1565739052
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30490,6 +30812,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1574949848}
+    - targetCorrespondingSourceObject: {fileID: 6889786331508448267, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1574949850}
   m_SourcePrefab: {fileID: 100100000, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
 --- !u!4 &1574949846 stripped
 Transform:
@@ -30516,11 +30841,34 @@ MonoBehaviour:
   moveSpeed: 2
   wanderTime: 2
   idleTime: 2
-  surfaceCheckDistance: 2
   directionChangeInterval: 0.5
+  turnSpeed: 5
+  surfaceCheckDistance: 2
   surfaceLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  audioSource: {fileID: 0}
+  scuttleClips: []
+--- !u!95 &1574949849 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2459871616111096729, guid: 1e506498bf922a54c97fba54d05a9297, type: 3}
+  m_PrefabInstance: {fileID: 1574949845}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1574949850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574949847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5988d9aab2555f04f87f6116526b5f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Npc.CockroachView
+  wander: {fileID: 1574949848}
+  animator: {fileID: 1574949849}
+  moveParameter: move
   audioSource: {fileID: 0}
   scuttleClips: []
 --- !u!1 &1581390798
@@ -31593,11 +31941,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cinemachine::Cinemachine.CinemachinePipeline
---- !u!4 &1632968557 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9015035544006644067, guid: ce05e0324e18dd3459c1082a9db9ccd0, type: 3}
-  m_PrefabInstance: {fileID: 9087364144627829778}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1633618233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32613,6 +32956,7 @@ GameObject:
   - component: {fileID: 1671137828}
   - component: {fileID: 1671137829}
   - component: {fileID: 1671137830}
+  - component: {fileID: 1671137831}
   m_Layer: 0
   m_Name: SceneTrigger
   m_TagString: Untagged
@@ -32668,14 +33012,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc159048c35add48b66f038135c16ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneTrigger
-  timeline: {fileID: 194426646}
-  cutsceneCamera: {fileID: 1870118499}
-  cutsceneAudioSource: {fileID: 330585550}
-  stopAudioOnEnd: 0
+  player: {fileID: 1671137831}
   triggerOnce: 1
   playerTag: Player
+  timeline: {fileID: 0}
+  cutsceneCamera: {fileID: 0}
+  cutsceneAudioSource: {fileID: 0}
+  stopAudioOnEnd: 0
   allowSkip: 0
   skipKey: 27
+--- !u!114 &1671137831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671137827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f851c698920da8647a5de46f5db4d862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Cinematics.CutscenePlayer
+  timeline: {fileID: 194426646}
+  cutsceneCamera: {fileID: 1870118499}
+  cameraPriority: 100
+  cutToCamera: 0
+  audioSource: {fileID: 330585550}
+  stopAudioOnEnd: 0
+  allowSkip: 0
+  skipKey: 27
+  onCutsceneStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCutsceneEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1680115967
 GameObject:
   m_ObjectHideFlags: 0
@@ -33394,18 +33765,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2830a4acb055274c87e0ec999d9d5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GabrielBissonnette.SAD.AudioSettingsManager
-  audioMixer: {fileID: 24100000, guid: bcd9034c998f6b64896803e67c7fd00c, type: 2}
-  masterParameter: MasterVolume
-  fxParameter: FXVolume
-  musicParameter: MusicVolume
-  defaultMasterVolume: 0.7
-  defaultFXVolume: 0.7
-  defaultMusicVolume: 0.7
   masterSlider: {fileID: 1566608004}
   fxSlider: {fileID: 54403237}
   musicSlider: {fileID: 969721686}
-  sound_click: {fileID: 8300000, guid: e66fa4a223464114b92005f0fe0751f7, type: 3}
-  sound_hover: {fileID: 8300000, guid: f0cee066cdd3637459120fbc8a38b953, type: 3}
+  uiAudioSource: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: e66fa4a223464114b92005f0fe0751f7, type: 3}
+  hoverSound: {fileID: 8300000, guid: f0cee066cdd3637459120fbc8a38b953, type: 3}
 --- !u!82 &1747181240
 AudioSource:
   m_ObjectHideFlags: 0
@@ -34535,6 +34900,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8ab19425dcf9754cabc1ff9fffffa3d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1904274917}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8ab19425dcf9754cabc1ff9fffffa3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904274918}
     - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: f8ab19425dcf9754cabc1ff9fffffa3d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2027895770}
@@ -35114,6 +35482,7 @@ MonoBehaviour:
   audioSource: {fileID: 1825637488}
   delay: 2
   fadeTime: 0.5
+  targetVolume: 1
 --- !u!1 &1829888911 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1341595379593194559, guid: f8ab19425dcf9754cabc1ff9fffffa3d, type: 3}
@@ -36248,8 +36617,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
+  requireInteractKey: 1
+  interactKey: 101
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &1904274918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904274916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 1904274917}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   targetObjects:
   - {fileID: 2027895766}
   - {fileID: 362824309}
@@ -36272,12 +36667,6 @@ MonoBehaviour:
   - {fileID: 130280658}
   - {fileID: 1829888911}
   - {fileID: 1371957068}
-  requireInteractKey: 1
-  interactKey: 101
-  player: {fileID: 98365673}
-  onActivated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1915385704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45455,6 +45844,7 @@ MonoBehaviour:
   vignetteInside: 0.5
   vignetteOutside: 0.3
   smoothSpeed: 3
+  volume: {fileID: 0}
 --- !u!1 &2102512110 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ddec6dc30840f944c959042852e68501, type: 3}

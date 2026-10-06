@@ -467,9 +467,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GabrielBissonnette.SAD.PauseMenuManager
   pauseMenuCanvas: {fileID: 0}
+  pauseKey: 27
+  menuSceneName: menu
   resumeButton: {fileID: 0}
   settingsButton: {fileID: 0}
   quitButton: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  uiAudioSource: {fileID: 0}
   clickSound: {fileID: 0}
   openSound: {fileID: 0}
   closeSound: {fileID: 0}
@@ -663,11 +667,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinematicCamera
   target: {fileID: 9015035544006644067}
-  offset: {x: 0, y: 2, z: -6}
   distance: 6
   minDistance: 1
   maxDistance: 8
   cameraHeight: 2
+  zoomSpeed: 5
   mouseSensitivity: 3
   rotationSmoothness: 10
   minVerticalAngle: -35
@@ -681,6 +685,7 @@ MonoBehaviour:
   emergencyDistance: 0.5
   lookAheadDistance: 2
   lookAheadSpeed: 2
+  lockCursorOnStart: 1
 --- !u!1 &4378581591940767969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,6 +1450,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5366422469247407273}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3019545528517973697}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8006994860984069598}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2450799635713687319}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4440611958991329531}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1502752220581276389}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8753030741180587137}
     - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4844470724992673151}
@@ -1517,14 +1540,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlashlightToggle
   isAvailable: 0
-  flashlightObject: {fileID: 8620572738372183047}
-  lightObject: {fileID: 8215471623186239602}
-  animator: {fileID: 5366422469247407273}
+  toggleKey: 102
+  toggleCooldown: 0.3
+  flashlightObject: {fileID: 0}
+  lightObject: {fileID: 0}
+  animator: {fileID: 0}
   lightObjectDelay: 0.5
   turnOffDelay: 0.3
-  audioSource: {fileID: 4744913524970462411}
-  lightOnSound: {fileID: 8300000, guid: c2e3cc592074bde4f9d620090f157037, type: 3}
-  lightOffSound: {fileID: 8300000, guid: d5e47470bddf7cf4a9f6000550c1ccfd, type: 3}
+  audioSource: {fileID: 0}
+  lightOnSound: {fileID: 0}
+  lightOffSound: {fileID: 0}
 --- !u!114 &4885182396383338061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,39 +1570,21 @@ MonoBehaviour:
   jumpForce: 6
   airControl: 100
   rotationSpeed: 7
+  runRotationMultiplier: 1.3
   groundCheck: {fileID: 3395264481118653354}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 448
-  animator: {fileID: 5366422469247407273}
   useMainCamera: 1
   cameraTransform: {fileID: 0}
-  footstepLayers:
-  - layer:
-      serializedVersion: 2
-      m_Bits: 64
-    source: {fileID: 7091164856840277166}
-    clips:
-    - {fileID: 8300000, guid: 860b007656b0a3b4295efd7a8e30f8e4, type: 3}
-    - {fileID: 8300000, guid: ac544a706b4bf7f43a9b7452750586b6, type: 3}
-    - {fileID: 8300000, guid: 8613bdd52d064e245847b0b4cfc67326, type: 3}
-    - {fileID: 8300000, guid: 99503aefbd94f0d4c8a3a5987593df13, type: 3}
-    - {fileID: 8300000, guid: 71305aa66db099043b5b264403094a97, type: 3}
-    - {fileID: 8300000, guid: 88927c01c2d1169449085480131672d1, type: 3}
-    - {fileID: 8300000, guid: 0711dcb5c86e5a7479bf867287196e95, type: 3}
-    currentIndex: 0
-  - layer:
-      serializedVersion: 2
-      m_Bits: 768
-    source: {fileID: 3921721034568748334}
-    clips:
-    - {fileID: 8300000, guid: a42f57f0c40e93545b7a7b0954ed46b4, type: 3}
-    - {fileID: 8300000, guid: 027dcd124a0145848bb46506f396ccec, type: 3}
-    currentIndex: 0
+  runKey: 304
+  jumpKey: 32
+  animator: {fileID: 0}
+  footstepLayers: []
   fearThreshold: 0.1
-  fearEffect1: {fileID: 5717187764370353769}
-  fearEffect2: {fileID: 2588056638651273007}
+  fearEffect1: {fileID: 0}
+  fearEffect2: {fileID: 0}
   afkTriggerTime: 5
   afkCooldown: 10
 --- !u!95 &5366422469247407273
@@ -1602,6 +1609,132 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3019545528517973697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437280075104910036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a72fc65bf75cdc409f555757d4e2d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFearState
+  fearThreshold: 0.1
+--- !u!114 &8006994860984069598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437280075104910036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4b9779c8babec4db420f761d8b3e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerIdleBehaviour
+  motor: {fileID: 4885182396383338061}
+  afkTriggerTime: 5
+  afkCooldown: 10
+--- !u!114 &2450799635713687319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437280075104910036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea07cb2d2d5f02b4886cdc5d58cf5cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFearEffects
+  fearState: {fileID: 3019545528517973697}
+  effects:
+  - {fileID: 5717187764370353769}
+  - {fileID: 2588056638651273007}
+--- !u!114 &4440611958991329531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437280075104910036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc8ac30f00397b4c9955d5819103d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerAnimationView
+  animator: {fileID: 5366422469247407273}
+  motor: {fileID: 4885182396383338061}
+  fearState: {fileID: 3019545528517973697}
+  idleBehaviour: {fileID: 8006994860984069598}
+  walkParameter: walk
+  runParameter: run
+  jumpTrigger: jump
+  fearParameter: fear
+  idleTriggers:
+  - afk
+  - afk2
+--- !u!114 &1502752220581276389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437280075104910036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8442dbd45fe901746868f33c0aafdf6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFootsteps
+  motor: {fileID: 4885182396383338061}
+  probeDistance: 1
+  footstepLayers:
+  - layer:
+      serializedVersion: 2
+      m_Bits: 64
+    source: {fileID: 7091164856840277166}
+    clips:
+    - {fileID: 8300000, guid: 860b007656b0a3b4295efd7a8e30f8e4, type: 3}
+    - {fileID: 8300000, guid: ac544a706b4bf7f43a9b7452750586b6, type: 3}
+    - {fileID: 8300000, guid: 8613bdd52d064e245847b0b4cfc67326, type: 3}
+    - {fileID: 8300000, guid: 99503aefbd94f0d4c8a3a5987593df13, type: 3}
+    - {fileID: 8300000, guid: 71305aa66db099043b5b264403094a97, type: 3}
+    - {fileID: 8300000, guid: 88927c01c2d1169449085480131672d1, type: 3}
+    - {fileID: 8300000, guid: 0711dcb5c86e5a7479bf867287196e95, type: 3}
+    currentIndex: 0
+  - layer:
+      serializedVersion: 2
+      m_Bits: 768
+    source: {fileID: 3921721034568748334}
+    clips:
+    - {fileID: 8300000, guid: a42f57f0c40e93545b7a7b0954ed46b4, type: 3}
+    - {fileID: 8300000, guid: 027dcd124a0145848bb46506f396ccec, type: 3}
+    currentIndex: 0
+--- !u!114 &8753030741180587137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437280075104910036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f139618ee68341f43ba78da96352850b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.FlashlightView
+  flashlight: {fileID: 5887765292144783953}
+  flashlightObject: {fileID: 8620572738372183047}
+  lightObject: {fileID: 8215471623186239602}
+  animator: {fileID: 5366422469247407273}
+  onTrigger: flashlightOn
+  offTrigger: flashlightOff
+  lightObjectDelay: 0.5
+  turnOffDelay: 0.3
+  audioSource: {fileID: 4744913524970462411}
+  lightOnSound: {fileID: 8300000, guid: c2e3cc592074bde4f9d620090f157037, type: 3}
+  lightOffSound: {fileID: 8300000, guid: d5e47470bddf7cf4a9f6000550c1ccfd, type: 3}
 --- !u!4 &962177427705667694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}

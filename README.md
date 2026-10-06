@@ -19,49 +19,60 @@ Third-person exploration with dedicated first-person zones. Built with **Unity 6
 
 - **Exploration.** You control the kitty (WASD, Shift to run, Space to jump, F for the flashlight). The camera is a third-person Cinemachine rig with collision handling. Trigger zones switch to a first-person camera without any snap in the view direction.
 - **Fear.** Near hostile NPCs the screen gradually "breaks" with a glitch effect (Fronkon Games Glitches → Hacked) and the vignette closes in. Once the intensity crosses a threshold the character enters a fear animation and extra visual effects kick in.
-- **Interaction.** Objects get an outline when you approach (HaloHighlighter). Pressing **E** activates them: plays an animation, shows a localized hint, or marks progress. When every required object has been collected, a Timeline cutscene starts.
-- **Cutscenes.** Trigger volumes and the object manager start a PlayableDirector with its own virtual camera, lock player input and block the pause menu. Esc skips.
+- **Interaction.** Objects get an outline when you approach. Pressing **E** activates them: plays an animation, shows a localized hint, or marks progress. When every required memory has been collected, a Timeline cutscene starts: the camera flies to the sink, the sink fills with blood, then a window shot follows and the monster lunges at the glass.
+- **Cutscenes.** Trigger volumes and the collectibles manager drive a shared cutscene player: Timeline, its own virtual camera, audio, skip, player lock.
 - **AFK animations.** Stand still for 10 seconds and the kitty plays one of two random idle animations.
-- **Surface footsteps.** Footstep sounds depend on the layer the character stands on (concrete, wood, etc.).
+- **Surface footsteps.** Footstep sounds depend on the layer the character stands on.
 - **Cockroaches.** Autonomous NPCs that wander over surfaces, bounce off walls and scuttle audibly.
 
 ## Menu and settings
 
 - Intro video → main menu (Sad Main Menu Pack) → loading screen with video → level.
 - Pause menu on Esc with time scale pause, sounds and a return to the main menu.
-- Global settings manager (`DontDestroyOnLoad`, PlayerPrefs): Master / FX / Music volume through an AudioMixer, quality level, VSync, screen resolution.
-- **Localization in 10 languages**: English, Ukrainian, Russian, Japanese, German, French, Spanish, Turkish, Italian, Polish. UI texts (`LocalizedTMP`), dropdowns and in-game hints update instantly when the language changes.
+- Global settings (`DontDestroyOnLoad`, PlayerPrefs): Master / FX / Music volume through an AudioMixer, quality level, VSync, screen resolution.
+- **Localization in 10 languages**: English, Ukrainian, Russian, Japanese, German, French, Spanish, Turkish, Italian, Polish. UI texts, dropdowns and in-game hints update instantly when the language changes.
 
 ## Project structure
 
 ```
 Assets/
+├── Animations/        animator controllers and clips per character
+├── Audio/             ambient, game, NPC sounds and the main mixer
+├── Cinematics/        Timeline assets
+├── Models/            own meshes only (FBX / DAE), one folder per model
+├── Prefabs/           Player, Esc (pause menu), Video Player, Npc/
 ├── Scenes/            intro, menu, loading, lvl1 (in build), lvl2, lvl3 (in progress)
-├── Scripts/
-│   ├── Player/        PlayerController, FlashlightToggle
-│   ├── Cameras/       FirstPersonCamera, CameraSwitchTrigger, HorizontalCamera
-│   ├── Cinematics/    CutsceneTrigger, HaloHighlighterCutsceneManager, CinematicCamera
-│   ├── Objects/       HaloHighlighter, InteractiveHint, HintMessageManager, ObjectInteraction
-│   ├── Npc/           CockroachController, NPCglitch (GameRenderManager, NPCRenderTrigger, Vignette)
-│   ├── Menu/          PauseMenuManager, MainMenuManager, GlobalSettingsManager, localization
-│   └── Audio/         DelayedAudioPlay
-├── Prefabs/           Esc (pause menu), Labirint, Video Player
-├── Settings/          URP assets LOW / NORMAL / BEST, Volume profiles GAME / HACKED
-└── Materials/         models, audio, video, fonts and third-party packs
+├── Scripts/           game code, see below
+├── Settings/          URP assets LOW / NORMAL / BEST, volume profiles, physics materials
+├── ThirdParty/        Asset Store packs, kept intact
+├── Videos/            intro and in-game videos
+└── Visual/
+    ├── Images/        UI sprites and posters
+    ├── Materials/     materials, one folder per model
+    ├── Shaders/       BloodWaterURP, VisibleOutline, Vertex shader graph
+    └── Textures/      textures, one folder per model
 Puss in Hell SEO/      logo, Steam capsules, screenshots, teaser
 ```
 
-## Core systems
+## Code layout
 
-| System | Script | What it does |
+Every script lives in a `PussInHell.*` namespace. Business logic and presentation are separate components: logic raises C# events or UnityEvents, views subscribe to them. No `Debug.Log`, no comments.
+
+| Namespace | Logic | Presentation |
 |---|---|---|
-| Movement | `PlayerController` | Camera-relative Rigidbody movement, running, jumping, per-layer footsteps, fear state, AFK |
-| Glitch | `GameRenderManager` + `NPCRenderTrigger` | Every NPC reports an intensity based on distance each frame; the manager takes the maximum and smoothly applies it to the Hacked effect |
-| Vignette | `VignetteRadiusTrigger` | Drives the Vignette in the Global Volume by distance to the player |
-| Cameras | `CameraSwitchTrigger` | Swaps virtual camera priorities, syncs the FPS camera yaw/pitch, hides the Player layer from the culling mask |
-| Highlight | `HaloHighlighter` | Adds an outline material to renderers within a radius, fires `OnAnyActivated` for managers |
-| Hints | `HintMessageManager` | Singleton with key-based localized messages and fade in/out |
-| Loading | `VideoSceneLoader` | Loads the scene asynchronously and activates it once the video finishes |
+| `Core` | `PlayerControlLock`, `CutsceneState`, `PlayerLocator` | |
+| `Player` | `PlayerMotor`, `Flashlight`, `PlayerFearState`, `PlayerIdleBehaviour` | `PlayerAnimationView`, `PlayerFootsteps`, `PlayerFearEffects`, `FlashlightView` |
+| `Interaction` | `Interactable`, `ProximityHint`, `ObjectInteraction`, `TextTriggerDisplay` | `OutlineHighlight`, `HintSpriteView` |
+| `Hints` | `HintMessageService`, `LocalizedMessage` | `HintMessageView` |
+| `Cinematics` | `CutscenePlayer`, `CutsceneTrigger`, `CollectiblesCutscene`, `DelayedTeleport` | `CameraDollyShot`, `SinkBloodFill` |
+| `Npc` | `GlitchIntensityHub`, `GlitchProximityTrigger`, `CockroachWander` | `VignetteProximity`, `CockroachView` |
+| `Cameras` | `CameraSwitchTrigger` | `FirstPersonCamera`, `CinematicCamera`, `HorizontalCamera` |
+| `Settings` | `GameSettings` | `VolumeSlidersUI`, `QualitySwitcherUI`, `ResolutionDropdownUI`, `VSyncToggle` |
+| `Localization` | `LanguageProvider`, `GameLanguage` | `LocalizedTMP`, `LocalizedDropdown`, `LanguageDropdownUI` |
+| `UI` | `PauseMenu`, `VideoSceneLoader` | `MainMenuManager`, `UIButtonSounds`, `FadeOutImage` |
+| `Audio` | | `AudioFadeIn` |
+
+`MainMenuManager` stays in the `GabrielBissonnette.SAD` namespace because the menu pack's custom editor depends on it.
 
 ## Tech
 

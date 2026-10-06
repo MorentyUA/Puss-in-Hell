@@ -693,11 +693,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinematicCamera
   target: {fileID: 754790896}
-  offset: {x: 0, y: 2, z: -6}
   distance: 6
   minDistance: 1
   maxDistance: 8
   cameraHeight: 2
+  zoomSpeed: 5
   mouseSensitivity: 3
   rotationSmoothness: 10
   minVerticalAngle: -35
@@ -711,6 +711,7 @@ MonoBehaviour:
   emergencyDistance: 0.5
   lookAheadDistance: 2
   lookAheadSpeed: 2
+  lockCursorOnStart: 1
 --- !u!114 &93676084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,6 +1805,7 @@ MonoBehaviour:
   Gif: {fileID: 11400000, guid: 4d63d917690ff34418cb33e96c896ea3, type: 2}
 --- !u!212 &146258396
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1849,6 +1851,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6519f4def6580214f860fd2168cc306e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1858,7 +1861,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &146258397
 Transform:
@@ -1930,6 +1932,7 @@ MonoBehaviour:
   bobFrequency: 2
   bobHorizontalAmplitude: 0.05
   bobVerticalAmplitude: 0.1
+  manageCursor: 1
 --- !u!114 &148374729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4348,6 +4351,7 @@ MonoBehaviour:
   Gif: {fileID: 11400000, guid: 4d63d917690ff34418cb33e96c896ea3, type: 2}
 --- !u!212 &375559240
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4393,6 +4397,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6519f4def6580214f860fd2168cc306e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4402,7 +4407,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &375559241
 Transform:
@@ -6614,6 +6618,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2533094174063719781, guid: 766968d3ba187fe4bb1c8781064b9b47, type: 3}
       insertIndex: -1
       addedObject: {fileID: 576432829}
+    - targetCorrespondingSourceObject: {fileID: 2533094174063719781, guid: 766968d3ba187fe4bb1c8781064b9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 576432830}
   m_SourcePrefab: {fileID: 100100000, guid: 766968d3ba187fe4bb1c8781064b9b47, type: 3}
 --- !u!4 &576432821 stripped
 Transform:
@@ -6686,13 +6693,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 576432822}
   requireInteractKey: 0
   interactKey: 101
-  player: {fileID: 0}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &576432830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576432822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 576432829}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 576432822}
 --- !u!1001 &582190290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7275,6 +7305,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2108530724290984402, guid: bd94ef3ab8ae69745b1f6f6b77a018c7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 627186517}
+    - targetCorrespondingSourceObject: {fileID: 2108530724290984402, guid: bd94ef3ab8ae69745b1f6f6b77a018c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 627186518}
   m_SourcePrefab: {fileID: 100100000, guid: bd94ef3ab8ae69745b1f6f6b77a018c7, type: 3}
 --- !u!4 &627186509 stripped
 Transform:
@@ -7347,13 +7380,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 627186510}
   requireInteractKey: 0
   interactKey: 101
-  player: {fileID: 0}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &627186518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627186510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 627186517}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 627186510}
 --- !u!1001 &630673881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8406,6 +8462,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9160376068419082745, guid: 999d3973a78db314cb4a32b7b30a845f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 690787218}
+    - targetCorrespondingSourceObject: {fileID: 9160376068419082745, guid: 999d3973a78db314cb4a32b7b30a845f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 690787219}
   m_SourcePrefab: {fileID: 100100000, guid: 999d3973a78db314cb4a32b7b30a845f, type: 3}
 --- !u!4 &690787210 stripped
 Transform:
@@ -8478,13 +8537,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 690787211}
   requireInteractKey: 0
   interactKey: 101
-  player: {fileID: 0}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &690787219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690787211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 690787218}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 690787211}
 --- !u!1 &700248675
 GameObject:
   m_ObjectHideFlags: 0
@@ -9302,6 +9384,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 754790903}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754790913}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754790912}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754790911}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754790910}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754790909}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 754790908}
     - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: 268924e5faf6a3646b9d23d2df747d88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 754790902}
@@ -9386,39 +9486,21 @@ MonoBehaviour:
   jumpForce: 6
   airControl: 100
   rotationSpeed: 7
+  runRotationMultiplier: 1.3
   groundCheck: {fileID: 1139789454}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 448
-  animator: {fileID: 754790903}
   useMainCamera: 1
   cameraTransform: {fileID: 148374726}
-  footstepLayers:
-  - layer:
-      serializedVersion: 2
-      m_Bits: 64
-    source: {fileID: 1960950405}
-    clips:
-    - {fileID: 8300000, guid: 860b007656b0a3b4295efd7a8e30f8e4, type: 3}
-    - {fileID: 8300000, guid: ac544a706b4bf7f43a9b7452750586b6, type: 3}
-    - {fileID: 8300000, guid: 8613bdd52d064e245847b0b4cfc67326, type: 3}
-    - {fileID: 8300000, guid: 99503aefbd94f0d4c8a3a5987593df13, type: 3}
-    - {fileID: 8300000, guid: 71305aa66db099043b5b264403094a97, type: 3}
-    - {fileID: 8300000, guid: 88927c01c2d1169449085480131672d1, type: 3}
-    - {fileID: 8300000, guid: 0711dcb5c86e5a7479bf867287196e95, type: 3}
-    currentIndex: 0
-  - layer:
-      serializedVersion: 2
-      m_Bits: 768
-    source: {fileID: 1523310343}
-    clips:
-    - {fileID: 8300000, guid: a42f57f0c40e93545b7a7b0954ed46b4, type: 3}
-    - {fileID: 8300000, guid: 027dcd124a0145848bb46506f396ccec, type: 3}
-    currentIndex: 0
+  runKey: 304
+  jumpKey: 32
+  animator: {fileID: 0}
+  footstepLayers: []
   fearThreshold: 0.1
-  fearEffect1: {fileID: 146258394}
-  fearEffect2: {fileID: 375559238}
+  fearEffect1: {fileID: 0}
+  fearEffect2: {fileID: 0}
   afkTriggerTime: 5
   afkCooldown: 10
 --- !u!114 &754790905
@@ -9434,14 +9516,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlashlightToggle
   isAvailable: 0
-  flashlightObject: {fileID: 112372441}
-  lightObject: {fileID: 1982054650}
-  animator: {fileID: 754790903}
+  toggleKey: 102
+  toggleCooldown: 0.3
+  flashlightObject: {fileID: 0}
+  lightObject: {fileID: 0}
+  animator: {fileID: 0}
   lightObjectDelay: 0.5
   turnOffDelay: 0.3
-  audioSource: {fileID: 112372443}
-  lightOnSound: {fileID: 8300000, guid: c2e3cc592074bde4f9d620090f157037, type: 3}
-  lightOffSound: {fileID: 8300000, guid: d5e47470bddf7cf4a9f6000550c1ccfd, type: 3}
+  audioSource: {fileID: 0}
+  lightOnSound: {fileID: 0}
+  lightOffSound: {fileID: 0}
 --- !u!54 &754790906
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9492,6 +9576,132 @@ CapsuleCollider:
   m_Height: 1.2039576
   m_Direction: 1
   m_Center: {x: 0, y: -0.10197878, z: 0}
+--- !u!114 &754790908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754790900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f139618ee68341f43ba78da96352850b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.FlashlightView
+  flashlight: {fileID: 754790905}
+  flashlightObject: {fileID: 112372441}
+  lightObject: {fileID: 1982054650}
+  animator: {fileID: 754790903}
+  onTrigger: flashlightOn
+  offTrigger: flashlightOff
+  lightObjectDelay: 0.5
+  turnOffDelay: 0.3
+  audioSource: {fileID: 112372443}
+  lightOnSound: {fileID: 8300000, guid: c2e3cc592074bde4f9d620090f157037, type: 3}
+  lightOffSound: {fileID: 8300000, guid: d5e47470bddf7cf4a9f6000550c1ccfd, type: 3}
+--- !u!114 &754790909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754790900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8442dbd45fe901746868f33c0aafdf6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFootsteps
+  motor: {fileID: 754790904}
+  probeDistance: 1
+  footstepLayers:
+  - layer:
+      serializedVersion: 2
+      m_Bits: 64
+    source: {fileID: 1960950405}
+    clips:
+    - {fileID: 8300000, guid: 860b007656b0a3b4295efd7a8e30f8e4, type: 3}
+    - {fileID: 8300000, guid: ac544a706b4bf7f43a9b7452750586b6, type: 3}
+    - {fileID: 8300000, guid: 8613bdd52d064e245847b0b4cfc67326, type: 3}
+    - {fileID: 8300000, guid: 99503aefbd94f0d4c8a3a5987593df13, type: 3}
+    - {fileID: 8300000, guid: 71305aa66db099043b5b264403094a97, type: 3}
+    - {fileID: 8300000, guid: 88927c01c2d1169449085480131672d1, type: 3}
+    - {fileID: 8300000, guid: 0711dcb5c86e5a7479bf867287196e95, type: 3}
+    currentIndex: 0
+  - layer:
+      serializedVersion: 2
+      m_Bits: 768
+    source: {fileID: 1523310343}
+    clips:
+    - {fileID: 8300000, guid: a42f57f0c40e93545b7a7b0954ed46b4, type: 3}
+    - {fileID: 8300000, guid: 027dcd124a0145848bb46506f396ccec, type: 3}
+    currentIndex: 0
+--- !u!114 &754790910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754790900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc8ac30f00397b4c9955d5819103d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerAnimationView
+  animator: {fileID: 754790903}
+  motor: {fileID: 754790904}
+  fearState: {fileID: 754790913}
+  idleBehaviour: {fileID: 754790912}
+  walkParameter: walk
+  runParameter: run
+  jumpTrigger: jump
+  fearParameter: fear
+  idleTriggers:
+  - afk
+  - afk2
+--- !u!114 &754790911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754790900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea07cb2d2d5f02b4886cdc5d58cf5cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFearEffects
+  fearState: {fileID: 754790913}
+  effects:
+  - {fileID: 146258394}
+  - {fileID: 375559238}
+--- !u!114 &754790912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754790900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4b9779c8babec4db420f761d8b3e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerIdleBehaviour
+  motor: {fileID: 754790904}
+  afkTriggerTime: 5
+  afkCooldown: 10
+--- !u!114 &754790913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754790900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a72fc65bf75cdc409f555757d4e2d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Player.PlayerFearState
+  fearThreshold: 0.1
 --- !u!1001 &754900550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11107,6 +11317,7 @@ GameObject:
   - component: {fileID: 890808424}
   - component: {fileID: 890808423}
   - component: {fileID: 890808422}
+  - component: {fileID: 890808426}
   m_Layer: 0
   m_Name: Hint
   m_TagString: Untagged
@@ -11191,6 +11402,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11234,6 +11446,7 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 --- !u!212 &890808424
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11279,6 +11492,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7e2126237f4228140b5570e2e0494f39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
@@ -11288,7 +11502,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &890808425
 MonoBehaviour:
@@ -11303,19 +11516,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveHint
   interactionRadius: 5
-  disappearDistance: 0.1
   pulseDistance: 2
+  disappearDistance: 0.1
+  isOneTimeInteract: 1
+  interactKey: 101
+  messageKey: Shkaf
+  messageDuration: 5
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
+  hintSprite: {fileID: 0}
+  hintText: {fileID: 0}
   pulseScale: 4
   pulseSpeed: 3
   pulseAmount: 0.02
-  hintSprite: {fileID: 890808424}
-  player: {fileID: 754790901}
-  hintText: {fileID: 0}
   fadeSpeed: 15
   rotationSpeed: 5
-  isOneTimeInteract: 1
-  messageKey: Shkaf
-  messageDuration: 5
+  audioSource: {fileID: 0}
+  interactSound: {fileID: 0}
+--- !u!114 &890808426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890808420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9361822467db7b041adf0da14492c1cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.HintSpriteView
+  hint: {fileID: 890808425}
+  hintSprite: {fileID: 890808424}
+  hintText: {fileID: 0}
+  visibleAlpha: 0.5
+  fadeSpeed: 15
+  rotationSpeed: 5
+  pulseScale: 4
+  pulseSpeed: 3
+  pulseAmount: 0.02
+  scaleLerpSpeed: 4
   audioSource: {fileID: 0}
   interactSound: {fileID: 8300000, guid: 12041817b0e565744947fe00b76d7e3e, type: 3}
 --- !u!1001 &892129295
@@ -13482,15 +13722,14 @@ MonoBehaviour:
   triggerCamera: {fileID: 148374729}
   playerCameraPriority: 10
   triggerCameraPriority: 20
-  playerTag: Player
   instantSwitch: 1
+  playerTag: Player
   disablePlayerControl: 0
   lockCursorOnExit: 0
   fpsCameraObject: {fileID: 148374725}
   manageFPSCamera: 1
   managePlayerLayer: 1
   playerLayerName: Player
-  showDebugMessages: 0
 --- !u!65 &1022965153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13617,6 +13856,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7835585423918409265, guid: f0a443e9445798a46b76d1d0f8122d08, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1030179649}
+    - targetCorrespondingSourceObject: {fileID: 7835585423918409265, guid: f0a443e9445798a46b76d1d0f8122d08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1030179650}
   m_SourcePrefab: {fileID: 100100000, guid: f0a443e9445798a46b76d1d0f8122d08, type: 3}
 --- !u!4 &1030179641 stripped
 Transform:
@@ -13689,13 +13931,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 1030179642}
   requireInteractKey: 0
   interactKey: 101
-  player: {fileID: 0}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &1030179650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030179642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 1030179649}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 1030179642}
 --- !u!1001 &1030243668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13786,6 +14051,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6036039522948389438, guid: ffc87b208f2674347bc0def478521f8c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1030243677}
+    - targetCorrespondingSourceObject: {fileID: 6036039522948389438, guid: ffc87b208f2674347bc0def478521f8c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1030243678}
   m_SourcePrefab: {fileID: 100100000, guid: ffc87b208f2674347bc0def478521f8c, type: 3}
 --- !u!4 &1030243669 stripped
 Transform:
@@ -13858,13 +14126,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 1030243670}
   requireInteractKey: 0
   interactKey: 101
-  player: {fileID: 0}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &1030243678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030243670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 1030243677}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 1030243670}
 --- !u!1001 &1032481894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14190,6 +14481,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1041546751
 MeshFilter:
@@ -16187,10 +16479,12 @@ MonoBehaviour:
   interactionRadius: 1
   interactionKey: 101
   pressPoint: {fileID: 29745378}
-  animationBoolName: falling
-  useBool: 1
-  player: {fileID: 754790901}
   animator: {fileID: 1128230433}
+  animationParameter: falling
+  useBool: 1
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1139356473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17265,6 +17559,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1205344796
 MeshFilter:
@@ -17575,14 +17870,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229710605}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.5377358, g: 0.4692506, b: 0.4692506, a: 1}
   m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -21292,6 +21587,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8857115750932987163, guid: 7b5b7c0cc9c654148b3ec711a61a508c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1516222554}
+    - targetCorrespondingSourceObject: {fileID: 8857115750932987163, guid: 7b5b7c0cc9c654148b3ec711a61a508c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1516222555}
   m_SourcePrefab: {fileID: 100100000, guid: 7b5b7c0cc9c654148b3ec711a61a508c, type: 3}
 --- !u!4 &1516222546 stripped
 Transform:
@@ -21364,13 +21662,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83ff91f198011e48b15c3a9a4a8dcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HaloHighlighter
-  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
   activationRadius: 3
-  targetObjects:
-  - {fileID: 1516222547}
   requireInteractKey: 0
   interactKey: 101
-  player: {fileID: 0}
+  onRangeEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onRangeExited:
+    m_PersistentCalls:
+      m_Calls: []
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  outlineMaterial: {fileID: 0}
+  targetObjects: []
+--- !u!114 &1516222555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516222547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f71dc2beff8674680322b4a12a9af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Interaction.OutlineHighlight
+  interactable: {fileID: 1516222554}
+  outlineMaterial: {fileID: 2100000, guid: 9a306d8d499eb2b41a0d4c3ebb3032e2, type: 2}
+  targetObjects:
+  - {fileID: 1516222547}
 --- !u!1001 &1516657802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23627,6 +23948,7 @@ GameObject:
   - component: {fileID: 1705958905}
   - component: {fileID: 1705958907}
   - component: {fileID: 1705958906}
+  - component: {fileID: 1705958908}
   m_Layer: 0
   m_Name: SceneTrigger
   m_TagString: Untagged
@@ -23661,12 +23983,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc159048c35add48b66f038135c16ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneTrigger
-  timeline: {fileID: 864588986}
-  cutsceneCamera: {fileID: 919014497}
-  cutsceneAudioSource: {fileID: 0}
-  stopAudioOnEnd: 1
+  player: {fileID: 1705958908}
   triggerOnce: 1
   playerTag: Player
+  timeline: {fileID: 0}
+  cutsceneCamera: {fileID: 0}
+  cutsceneAudioSource: {fileID: 0}
+  stopAudioOnEnd: 1
   allowSkip: 1
   skipKey: 27
 --- !u!65 &1705958907
@@ -23690,6 +24013,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 24.358387, y: 10.49338, z: 10.978294}
   m_Center: {x: -1.3170776, y: 4.74669, z: -4.8434563}
+--- !u!114 &1705958908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705958904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f851c698920da8647a5de46f5db4d862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PussInHell.Cinematics.CutscenePlayer
+  timeline: {fileID: 864588986}
+  cutsceneCamera: {fileID: 919014497}
+  cameraPriority: 100
+  cutToCamera: 0
+  audioSource: {fileID: 0}
+  stopAudioOnEnd: 1
+  allowSkip: 1
+  skipKey: 27
+  onCutsceneStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onCutsceneEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1712879584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25746,9 +26095,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GabrielBissonnette.SAD.PauseMenuManager
   pauseMenuCanvas: {fileID: 0}
+  pauseKey: 27
+  menuSceneName: menu
   resumeButton: {fileID: 0}
   settingsButton: {fileID: 0}
   quitButton: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  uiAudioSource: {fileID: 0}
   clickSound: {fileID: 0}
   openSound: {fileID: 0}
   closeSound: {fileID: 0}
@@ -27546,14 +27899,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982054650}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 60
   m_InnerSpotAngle: 0
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 1
     m_Resolution: -1
@@ -29239,6 +29592,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2102779903
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -29284,6 +29638,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a47b0be5a56d1534ea954985e43fe93b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -29293,7 +29648,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &2138996824
 PrefabInstance:
