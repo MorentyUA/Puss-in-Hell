@@ -14,8 +14,13 @@ namespace PussInHell.Core
             {
                 if (cached == null)
                 {
-                    var go = GameObject.FindGameObjectWithTag(Tag);
-                    cached = go != null ? go.transform : null;
+                    var motor = Object.FindFirstObjectByType<Player.PlayerMotor>();
+                    if (motor != null) cached = motor.transform;
+                    else
+                    {
+                        var go = GameObject.FindGameObjectWithTag(Tag);
+                        cached = go != null ? go.transform : null;
+                    }
                 }
                 return cached;
             }
