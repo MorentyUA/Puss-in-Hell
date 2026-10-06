@@ -42,8 +42,8 @@ Thumbs.db
 .DS_Store
 
 # Вихідні архіви Blender з Backrooms-паку (>100 МБ, Unity їх не імпортує)
-/Assets/Materials/Assets/Backrooms/BackroomsLikeAsset/BlendFile/*.zip
-/Assets/Materials/Assets/Backrooms/BackroomsLikeAsset/BlendFile/*.zip.meta
+/Assets/ThirdParty/Backrooms/BackroomsLikeAsset/BlendFile/*.zip
+/Assets/ThirdParty/Backrooms/BackroomsLikeAsset/BlendFile/*.zip.meta
 
 # Сирі відеозаписи для трейлерів (300–450 МБ кожен)
 /Puss in Hell SEO/Исходники/
