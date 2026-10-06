@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using Cinemachine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 /// <summary>
 /// Запускает катсцену когда все указанные HaloHighlighter объекты активированы
@@ -27,6 +28,12 @@ public class HaloHighlighterCutsceneManager : MonoBehaviour
     [Header("Trigger Settings")]
     [SerializeField] private bool triggerOnce = true;
     [SerializeField] private string playerTag = "Player";
+
+    [Header("События")]
+    [Tooltip("Вызывается в момент запуска катсцены (после Timeline.Play)")]
+    public UnityEvent onCutsceneStarted;
+    [Tooltip("Вызывается после завершения или пропуска катсцены")]
+    public UnityEvent onCutsceneEnded;
 
     [Header("Debug")]
     [SerializeField] private bool showDebugLogs = false;
@@ -63,7 +70,7 @@ public class HaloHighlighterCutsceneManager : MonoBehaviour
         }
 
         // Находим CinemachineBrain для управления блендингом
-        cinemachineBrain = FindObjectOfType<CinemachineBrain>();
+        cinemachineBrain = FindFirstObjectByType<CinemachineBrain>();
         if (cinemachineBrain != null)
         {
             // Сохраняем оригинальный блендинг
@@ -178,6 +185,8 @@ public class HaloHighlighterCutsceneManager : MonoBehaviour
         {
             timeline.Play();
         }
+
+        onCutsceneStarted?.Invoke();
     }
 
     private void SkipCutscene()
@@ -241,6 +250,8 @@ public class HaloHighlighterCutsceneManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        onCutsceneEnded?.Invoke();
     }
 
     private System.Collections.IEnumerator RestoreBlendAfterDelay()
