@@ -30,8 +30,6 @@ namespace PussInHell.Cinematics
 
         private CinemachineBrain brain;
         private CinemachineBlendDefinition originalBlend;
-        private CinemachineVirtualCameraBase previousCamera;
-        private int previousCameraPriority;
 
         public bool IsPlaying { get; private set; }
 
@@ -110,13 +108,6 @@ namespace PussInHell.Cinematics
         {
             if (cutsceneCamera == null) return;
 
-            previousCamera = brain != null ? brain.ActiveVirtualCamera as CinemachineVirtualCameraBase : null;
-            if (previousCamera != null)
-            {
-                previousCameraPriority = previousCamera.Priority;
-                previousCamera.Priority = 0;
-            }
-
             if (cutToCamera && brain != null)
                 brain.m_DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.Cut, 0f);
 
@@ -128,9 +119,6 @@ namespace PussInHell.Cinematics
             if (cutsceneCamera == null) return;
 
             cutsceneCamera.Priority = 0;
-            if (previousCamera != null) previousCamera.Priority = previousCameraPriority;
-            previousCamera = null;
-
             if (cutToCamera && brain != null) StartCoroutine(RestoreBlend());
         }
 
