@@ -29,17 +29,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DepthFadeDistance: 0.5
+    - _DepthFadeDistance: 0.03
     - _FresnelPower: 3
     - _NormalScale: 1
-    - _NormalStrength: 0.6
-    - _Smoothness: 0.85
-    - _WaveScale: 2
+    - _NormalStrength: 0.35
+    - _Smoothness: 0.92
+    - _WaveScale: 6
     - _WaveSpeed: 0.4
-    - _WaveStrength: 0.03
+    - _WaveStrength: 0.004
     m_Colors:
-    - _BaseColor: {r: 0.34999996, g: 0, b: 0, a: 0.92}
-    - _DeepColor: {r: 0.14999998, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.5, g: 0.049999982, b: 0.049999982, a: 1}
+    - _BaseColor: {r: 0.4, g: 0, b: 0, a: 1}
+    - _DeepColor: {r: 0.22, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 0.8, g: 0.08, b: 0.08, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
