@@ -12,7 +12,12 @@ public class TextTriggerDisplay : MonoBehaviour
     [SerializeField] private float fadeOutDuration = 0.5f;
     [SerializeField] private string playerTag = "Player";
 
+    [Header("Повторы")]
+    [Tooltip("Показать подсказку только при первом входе в зону")]
+    [SerializeField] private bool showOnlyOnce = true;
+
     private Coroutine fadeCoroutine;
+    private bool hasShown = false;
 
     private void Start()
     {
@@ -32,11 +37,17 @@ public class TextTriggerDisplay : MonoBehaviour
         // Проверяем что это игрок
         if (other.CompareTag(playerTag))
         {
-
             if (tmpText == null)
             {
                 return;
             }
+
+            if (showOnlyOnce && hasShown)
+            {
+                return;
+            }
+
+            hasShown = true;
 
             // Останавливаем предыдущую анимацию если есть
             if (fadeCoroutine != null)
