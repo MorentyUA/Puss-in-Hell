@@ -6801,6 +6801,7 @@ MonoBehaviour:
   cutsceneCamera: {fileID: 1476786113}
   cameraPriority: 100
   cutToCamera: 1
+  cutOnEnd: 1
   audioSource: {fileID: 361557208}
   stopAudioOnEnd: 0
   allowSkip: 0
@@ -17383,7 +17384,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   cutOnStart: 1
-  cutOnEnd: 0
+  cutOnEnd: 1
   directorToStop: {fileID: 361557206}
   allowSkip: 0
   skipKey: 27
@@ -38351,6 +38352,7 @@ MonoBehaviour:
   cutsceneCamera: {fileID: 1765055773}
   cameraPriority: 100
   cutToCamera: 0
+  cutOnEnd: 1
   audioSource: {fileID: 330585550}
   stopAudioOnEnd: 0
   allowSkip: 0

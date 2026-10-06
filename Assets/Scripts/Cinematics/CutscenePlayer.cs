@@ -15,6 +15,8 @@ namespace PussInHell.Cinematics
         [SerializeField] private int cameraPriority = 100;
         [Tooltip("Switch to the cutscene camera with a hard cut instead of the Brain blend")]
         [SerializeField] private bool cutToCamera = false;
+        [Tooltip("Return to the gameplay camera with a hard cut instead of the Brain blend")]
+        [SerializeField] private bool cutOnEnd = true;
 
         [Header("Audio")]
         [SerializeField] private AudioSource audioSource;
@@ -116,10 +118,14 @@ namespace PussInHell.Cinematics
 
         private void RestorePreviousCamera()
         {
-            if (cutsceneCamera == null) return;
+            if (brain != null && (cutOnEnd || cutToCamera))
+            {
+                if (cutOnEnd)
+                    brain.m_DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.Cut, 0f);
+                StartCoroutine(RestoreBlend());
+            }
 
-            cutsceneCamera.Priority = 0;
-            if (cutToCamera && brain != null) StartCoroutine(RestoreBlend());
+            if (cutsceneCamera != null) cutsceneCamera.Priority = 0;
         }
 
         private IEnumerator RestoreBlend()

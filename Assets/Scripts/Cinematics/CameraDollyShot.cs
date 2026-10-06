@@ -24,7 +24,7 @@ namespace PussInHell.Cinematics
         [Tooltip("Hard cut to the start pose instead of the Brain blend")]
         [SerializeField] private bool cutOnStart = true;
         [Tooltip("Hard cut back to the gameplay camera instead of the Brain blend")]
-        [SerializeField] private bool cutOnEnd = false;
+        [SerializeField] private bool cutOnEnd = true;
 
         [Header("Before Start")]
         [Tooltip("Timeline to stop first if it is still playing; its owner finishes its own cutscene")]
