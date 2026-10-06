@@ -28,6 +28,7 @@ namespace PussInHell.Hints
             }
 
             Instance = this;
+            transform.SetParent(null, true);
             DontDestroyOnLoad(gameObject);
 
             foreach (var message in localizedMessages)
